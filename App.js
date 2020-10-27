@@ -1,114 +1,60 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import { persistStore, } from 'redux-persist';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import ReduxThunk from 'redux-thunk';
+// import rootReducer from './src/reducers/rootReducer';
+import RouterComp from './src/router';
+import OneSignal from 'react-native-onesignal'; // Import package from node modules
+// import {AsyncStorage } from '@react-native-community/async-storage';
+export default class App extends Component {
+ 
+  constructor(properties) {
+    super(properties);
+    //Remove this method to stop OneSignal Debugging
+    OneSignal.setLogLevel(6, 0)
+    // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
+    OneSignal.init("85709f52-b07d-4e2b-8a75-6703178bb15a", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
+    OneSignal.inFocusDisplaying(2); // Controls what should happen if a notification is received while the app is open. 2 means that the notification will go directly to the device's notification center.
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+    // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step below)
+    OneSignal.promptForPushNotificationsWithUserResponse(this.myiOSPromptCallback);
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+     OneSignal.addEventListener('received', this.onReceived);
+     OneSignal.addEventListener('opened', this.onOpened);
+     OneSignal.addEventListener('ids', this.onIds);
+  }
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+  onReceived(notification) {
+    console.log("Notification received: ", notification);
+  }
+  myiOSPromptCallback(permission){
+    // do something with permission value
+    }
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
 
-export default App;
+  onIds(device) {
+    const phoneToken = device.userId;
+    // AsyncStorage.setItem("device",phoneToken )
+    console.log('Device info: ', phoneToken);
+  }
+  render() {
+    // const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
+    // const persisStore = persistStore(store)
+    return (
+      // <Provider >
+      //   <PersistGate>
+      //     <RouterComp />
+      //   </PersistGate>
+      // </Provider>
+      <RouterComp/>
+    )
+  }
+}
