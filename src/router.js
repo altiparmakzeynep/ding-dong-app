@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import { Router, Stack, Scene } from 'react-native-router-flux';
+// import { StyleSheet } from 'react-native';
+import { Router, Stack, Scene, Drawer, Tabs } from 'react-native-router-flux';
 import signIn from './components/authentication/signIn';
-import SignUp from './components/authentication/signUp';
-import Main from './components/pages/main';
+import signUp from './components/authentication/signUp';
 
 class RouterComp extends Component {
-
     render() {
          return (
             <Router>
@@ -20,36 +19,39 @@ class RouterComp extends Component {
                        
                         hideNavBar
                         key="signUp"
-                        component={SignUp} />
-                </Stack>
-                {/* <Stack initial={isMainLogin} key= "main">
-                    <Drawer
-                        tapToClose={true}
+                        component={signUp} />
+                </Stack> 
+
+                {/* <Stack key= "main"  >
+                <Tabs       
+                    tapToClose={true}
+                    hideNavBar
+                    tabs
+                    contentComponent={bottomBar}>
+                    <Scene title= "Homepage"
+                            key="Main"
+                            component={Main}/>
+                    <Scene title= "Homepage"
+                            key="Main"
+                            tabBarStyle={{backgroundColor: "red"}} 
+                            component={Main}/>
+                    <Scene title= "Homepage"
+                            key="Main"
+                            tabBarStyle={{backgroundColor: "red"}} 
+                            component={Main}/>
+                    <Scene title= "Homepage"
+                            key="Main"
+                            tabBarStyle={{backgroundColor: "red"}} 
+                            component={Main}/>
+                    </Tabs> 
+                    <Scene 
                         hideNavBar
-                        drawerIcon= {DrawerIcon}
-                        contentComponent={SideBar}>
-                        <Scene title= "Homepage"
-                                key="Main"
-                                component={Main}/>
-                    </Drawer>
-                    <Scene
-                        key="CreateTask"
-                        component={CreateTask}
-                        title="Yeni İş Kitle">
-                    </Scene>
-                    <Scene
-                        key="Users"
-                        component={Users}
-                        title= "Kitlenecekler" />
-                </Stack> */}
-                <Stack  key= "main">
-                    <Scene
-                        
-                        key="Main"
-                        title= "Homepage"
+                        key="Min"
                         component={Main}
-                        />
-                </Stack>
+                        title="Homepage">
+                    </Scene>
+                </Stack> */}
+
              </Stack>
         </Router>
            )
