@@ -2,8 +2,7 @@ import axios from 'axios';
 import { API_BASE} from '../config/env';
 import { Actions, Alert } from 'react-native';
 
-export const NAME_CHANGE                 = "name_change";
-export const SURNAME_CHANGE              = "surname_change";
+export const FULLNAME_CHANGE         = "fullname_change";
 export const EMAIL_CHANGE                = "email_change";
 export const PASSWORD_CHANGE             = "password_change";
 export const PASSWORD_CONFIRM_CHANGE     = "password_confirm_change"
@@ -11,6 +10,10 @@ export const PASSWORD_CONFIRM_CHANGE     = "password_confirm_change"
 export const SIGN_IN_CLICK      = "sign_in_click";
 export const SIGN_IN_SUCCESS    = "sign_in_success";
 export const SIGN_IN_FAILED     = "sign_in_failed";
+
+export const FB_LOGIN_CLICK       = "fb_login_click";
+export const FB_LOGIN_SUCCESS     = "fb_login_success";
+export const FB_LOGIN_FAILED      = "fb_login_failed";
 
 export const SIGN_UP_CLICK      = "sign_up_click";
 export const SIGN_UP_SUCCESS    = "sign_up_success";
@@ -20,15 +23,9 @@ export const LOG_OUT_CLICK      = "log_out_click";
 export const LOG_OUT_SUCCESS    = "log_out_success";
 export const LOG_OUT_FAILED     = "log_out_failed";
 
-export const nameChange = (value) => {
+export const fullNameChange = (value) => {
     return {
-        type: NAME_CHANGE,
-        payload: value
-    }
-}
-export const surNameChange = (value) => {
-    return {
-        type: SURNAME_CHANGE,
+        type: FULLNAME_CHANGE,
         payload: value
     }
 }
@@ -51,12 +48,12 @@ export const passwordConfirmChange = (value) => {
     }
 }
 
-export const signUp = (name, surname, password, passwordConfirm, token) => {
+export const signUpClicked = (nameSurname, password, passwordConfirm, token) => {
     return dispatch => {
         dispatch({
             type: SIGN_UP_CLICK
         })
-        console.log({name, surname, password, passwordConfirm, token});
+        console.log({nameSurname, password, passwordConfirm, token});
         axios({
             method: "POST",
             url: `${API_BASE}`,
@@ -64,7 +61,7 @@ export const signUp = (name, surname, password, passwordConfirm, token) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            data: JSON.stringify({name:name, surname:surname, password:password, passwordConfirm:passwordConfirm, phoneToken:token})
+            data: JSON.stringify({nameSurname:nameSurname, password:password, passwordConfirm:passwordConfirm, phoneToken:token})
         }).then((result) => {
             console.log("result: ", result.data)
             if(result.data.status == "success"){
@@ -77,7 +74,7 @@ export const signUp = (name, surname, password, passwordConfirm, token) => {
     }
 }
 
-export const signIn = (email, password ) => {
+export const signInClicked = (email, password ) => {
     return dispatch => {
         dispatch({
             type: SIGN_IN_CLICK
@@ -106,3 +103,59 @@ export const signIn = (email, password ) => {
     }
 }
 
+export const googleLogin = (idToken, user) => {
+    return dispatch => {
+        dispatch({
+            type: GOOGLE_LOGIN_CLICK
+        })
+        let data = JSON.stringify({ idToken: idToken, user: user })
+        axios({
+            method: "post",
+            url: `${API_BASE}/users/google_login`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            data: data
+        }).then((result) => {
+            console.log("result.data", result.data)
+            if(result.data.status == "success") {
+                dispatch({
+                    type: GOOGLE_LOGIN_SUCCESS,
+                    payload: result.data.data
+                })
+                Actions.main()
+            }
+        }).catch((err) => {
+            console.log("error", err)
+        })
+    }
+}
+
+export const facebookLogin = ( nameSurname, picture, id, access_token ) => {
+    return dispatch => {
+        dispatch({
+            type: FB_LOGIN_CLICK
+        })
+        let data = JSON.stringify({ nameSurname: nameSurname, picture: picture, id: id, access_token: access_token })
+        axios({
+            method: "post",
+            url: `${API_BASE}/users/fb_login`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            data: data
+        }).then((result) => {
+            if(result.data.status == "success") {
+                dispatch({
+                    type: FB_LOGIN_SUCCESS,
+                    payload: result.data.data
+                })
+                Actions.main()
+            }
+        }).catch((err) => {
+            console.log("err", err)
+        })
+    }
+}

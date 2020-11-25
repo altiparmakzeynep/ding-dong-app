@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">groceryDelivery</string>
+<string name="app_name">groceryDelivery</string>
+<string name="facebook_app_id">1017017985477434</string>
 </resources>
