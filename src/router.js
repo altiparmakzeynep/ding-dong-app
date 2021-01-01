@@ -4,26 +4,31 @@ import { responsiveSize } from './config/env';
 import { Router, Stack, Scene, Drawer, Tabs } from 'react-native-router-flux';
 import signIn from './components/authentication/signIn';
 import signUp from './components/authentication/signUp';
-import main from './components/main';
+import main from './components/pages/main';
+import cart from './components/pages/cart';
+import search from './components/pages/search';
+import others from './components/pages/others';
+import products from './components/pages/products';
 
 class RouterComp extends Component {
     render() {
          return (
             <Router>
-            <Stack key="root" hideNavBar >
+             <Stack key="root" hideNavBar >
                 <Stack key="auth" hideNavBar >
                     <Scene 
-                        
+                        initial
                         hideNavBar
                         key="signIn"
                         component={signIn} />
                     <Scene
-                       
+                    
                         hideNavBar
                         key="signUp"
                         component={signUp} />
                 </Stack> 
-                <Stack  initial
+
+                <Stack 
                        navigationBarStyle={styles.navigationBar}
                        key= "main">
                          <Tabs
@@ -32,68 +37,48 @@ class RouterComp extends Component {
                             tabBarStyle={styles.tabs}>
                              <Scene
                                 key="main"
-                                title="ANASAYFA"
+                                title="HOMEPAGE"
                                 icon={({focused}) => (
                                 <Image style={styles.tabIcon} source={focused ? require('./images/home.png'):require('./images/home.png')} />)}
                                 component={main} />
                             <Scene
                                 key="search"
-                                title="ARAMA"
+                                title="SEARCH"
                                 icon={({focused}) => (
                                     <Image style={styles.tabIcon} source={focused ? require('./images/loupe.png'):require('./images/loupe.png')} />)}
-                                component={main} />
+                                component={search} />
                             <Scene
                                 key="cart"
-                                title="Sepetim"
+                                title="CART"
                                 icon={({focused}) => (
                                     <Image style={styles.tabIcon} source={focused ? require('./images/groceries.png'):require('./images/groceries.png')} />)}
-                                component={main} />
-                            <Scene
-                                key="campaign"
-                                title="KAMPANYALAR"
-                                icon={({focused}) => (
-                                    <Image style={styles.tabIcon} source={focused ? require('./images/discount.png'):require('./images/discount.png')} />)}
-                                component={main} />
+                                component={cart} />
                             <Scene
                                 key="others"
-                                title="DİĞER"
+                                title="OTHERS"
                                 icon={({focused}) => (
                                     <Image style={styles.tabIcon} source={focused ? require('./images/menu.png'):require('./images/menu.png')} />)}
-                                component={main} />
-                        </Tabs>
-                        
+                                component={others} />
+                         </Tabs>
+                       
+                        <Scene 
+                            hideNavBar
+                            key="cart"
+                            component={cart} />
+                        <Scene 
+                            hideNavBar
+                            key="search"
+                            component={search} />
+                        <Scene 
+                            hideNavBar
+                            key="others"
+                            component={others} />  
+                        <Scene 
+                            
+                            key= "products"
+                            title= "PRODUCTS"
+                            component={products} />  
                 </Stack>
-               
-                {/* <Stack key= "main"  >
-                <Tabs       
-                    tapToClose={true}
-                    hideNavBar
-                    tabs
-                    contentComponent={bottomBar}>
-                    <Scene title= "Homepage"
-                            key="Main"
-                            component={Main}/>
-                    <Scene title= "Homepage"
-                            key="Main"
-                            tabBarStyle={{backgroundColor: "red"}} 
-                            component={Main}/>
-                    <Scene title= "Homepage"
-                            key="Main"
-                            tabBarStyle={{backgroundColor: "red"}} 
-                            component={Main}/>
-                    <Scene title= "Homepage"
-                            key="Main"
-                            tabBarStyle={{backgroundColor: "red"}} 
-                            component={Main}/>
-                    </Tabs> 
-                    <Scene 
-                        hideNavBar
-                        key="Min"
-                        component={Main}
-                        title="Homepage">
-                    </Scene>
-                </Stack> */}
-
              </Stack>
         </Router>
            )
