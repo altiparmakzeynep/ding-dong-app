@@ -3,23 +3,23 @@ import { View, TextInput, TouchableOpacity, StyleSheet, Text, Image } from 'reac
 import { responsiveSize, PhoneHeight, PhoneWidth } from '../../config/env';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { signInClicked} from '../../actions/authenticationAction';
+import { signInClicked } from '../../actions/authenticationAction';
 
 class signIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          emailValue: "",
+          phoneNumberValue: "",
           passwordValue: ""
         }
     }
 
   onSignIn = () => {
     console.log("bastı")
-    this.props.signInClicked(this.state.emailValue, this.state.passwordValue)
+    this.props.signInClicked(this.state.phoneNumberValue, this.state.passwordValue)
   }
     
-  onEmailChanged = (value) => this.setState({emailValue: value})
+  onPhoneNumberChanged = (value) => this.setState({phoneNumberValue: value})
   onPasswordChanged = (value) => this.setState({passwordValue: value})
 
     render() {
@@ -33,10 +33,10 @@ class signIn extends Component {
           </View>
           <View style= {styles.inputsContainer}>
             <TextInput 
-                placeholder= "e-mail"
+                placeholder= "phone number"
                 placeholderTextColor='#00000029'
                 style= {styles.input}
-                onChangeText={(value) => this.onEmailChanged(value)}/>
+                onChangeText={(value) => this.onPhoneNumberChanged(value)}/>
             <TextInput 
                 placeholder= "password"
                 placeholderTextColor='#00000029'
@@ -45,10 +45,11 @@ class signIn extends Component {
           </View>
           <View style= {styles.loginButtonContainer}>
             <TouchableOpacity 
-                onPress= {this.onSignIn()}
-                style= {styles.loginButton}>
+                style= {styles.loginButton}
+                onPress= {() => this.onSignIn()}>
               <Text style= {styles.loginText}>login</Text>
             </TouchableOpacity>
+            <Text> Hesabın yok mu? <Text onPress= {() => Actions.signUp()}> signup </Text></Text>
           </View>
         </View>   
       )
@@ -102,12 +103,11 @@ const styles = StyleSheet.create({
       fontSize: responsiveSize(15)
     }
  
-   
 })
 const mapStateToProps = state => {
-    const { emailValue,passwordValue } = state.authenticationReducer;
+    const { phoneNumberValue, passwordValue } = state.authenticationReducer;
     return {
-      emailValue,
+      phoneNumberValue,
       passwordValue
     }
   }

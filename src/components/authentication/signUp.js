@@ -3,12 +3,32 @@ import { View, TextInput, TouchableOpacity, StyleSheet, Text, Image } from 'reac
 import { responsiveSize, PhoneHeight, PhoneWidth } from '../../config/env';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fullNameChange,emailChange, passwordChange , passwordConfirmChange, signUpClicked} from '../../actions/authenticationAction';
+import { signUpClicked } from '../../actions/authenticationAction';
 
 class signUp extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+          fullNameValue: "",
+          phoneNumberValue: "",
+          emailValue: "",
+          passwordValue: "",
+          confirmPasswordValue: "",
+        }
     }
+
+onfullNameChanged = (value) =>this.setState({fullNameValue: value})
+onPhoneNumberChanged = (value) =>this.setState({phoneNumberValue: value})
+onEmailChanged = (value) => this.setState({emailValue: value})
+onPasswordChanged = (value) => this.setState({passwordValue: value})
+onConfirmPasswordChanged = (value) => this.setState({confirmPasswordValue: value})
+
+
+onSignUp = () => {
+    console.log("bastı mı");
+    this.props.signUpClicked(this.state.fullNameValue, this.state.phoneNumberValue, this.state.emailValue, this.state.passwordValue )
+}
+
     render() {
      return (
         <View style={styles.container}>
@@ -23,33 +43,35 @@ class signUp extends Component {
                 style={styles.input}
                 placeholder='name surname'
                 placeholderTextColor='#00000029'
-                onChangeText={(value) => this.props.fullNameChange(value)}/> 
+                onChangeText={this.onfullNameChange}/> 
             <TextInput 
                 style={styles.input}
                 placeholder='phone'
                 placeholderTextColor='#00000029'
-                onChangeText={(value) => this.props.emailChange(value)}
+                onChangeText={this.onPhoneNumberChanged}
                 />  
             <TextInput 
                 style={styles.input}
-                secureTextEntry
                 placeholder='e-mail'
                  placeholderTextColor='#00000029'
-                onChangeText={(value) => this.props.passwordChange(value)}/>    
+                onChangeText={this.onEmailChanged}/>    
             <TextInput 
                 secureTextEntry
                 style={styles.input}
                 placeholder='password'
                  placeholderTextColor='#00000029'
-                onChangeText={(value) => this.props.passwordConfirmChange(value)}/>  
+                onChangeText={(value) => this.onPasswordChanged(value)}/>  
             <TextInput 
+                secureTextEntry
                 style={styles.input}
                 placeholder='password confirm'
                 placeholderTextColor='#00000029'
-                onChangeText={(value) => this.props.nameChange(value)}/> 
+                onChangeText={this.onConfirmPasswordChanged}/> 
          </View>
          <View style= {styles.signUpButtonContainer}>
-             <TouchableOpacity style= {styles.signUpButton}>
+             <TouchableOpacity 
+                  onPress = {this.onSignUp()}
+                  style= {styles.signUpButton}>
                  <Text style= {styles.signUpButtonText}>sign up</Text>
              </TouchableOpacity>
          </View>
@@ -105,4 +127,19 @@ const styles = StyleSheet.create({
     }
 
 })
-export default signUp;
+
+const mapStateToProps = (state) => {
+    const { fullNameValue, phoneNumberValue, emailValue, passwordValue } = state.authenticationReducer;
+    return {
+       fullNameValue,
+       phoneNumberValue,
+       emailValue,
+       passwordValue,
+    }
+  }
+  export default connect(
+    mapStateToProps,
+    {
+      signUpClicked
+    }
+  )(signUp)

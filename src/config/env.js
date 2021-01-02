@@ -1,9 +1,7 @@
 import { Dimensions, View } from 'react-native';
 import { Platform, PixelRatio } from 'react-native';
 
-
-// export const API_BASE    = "http://pxralert.ozdemircibaris.xyz/api/v1"
-export const API_BASE    = "https://sleepy-falls-35778.herokuapp.com/api/v1"
+export const API_BASE    = "https://ecommerce-backapp.herokuapp.com/api/v1"
 
 export const PhoneHeight = Dimensions.get("window").height;
 export const PhoneWidth  = Dimensions.get("window").width;

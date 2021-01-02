@@ -1,3 +1,4 @@
+import { persistReducer } from 'redux-persist';
 import {
     SIGN_UP_CLICK,
     SIGN_UP_FAILED,
@@ -6,11 +7,18 @@ import {
     SIGN_IN_FAILED,
     SIGN_IN_SUCCESS
 } from '../actions/authenticationAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const INITIAL_STATE = {
     userToken: ""
 }
-
+const persistConfig = {
+    key: 'root',
+    storage: AsyncStorage,
+    whitelist: [ 'userToken']
+    // whitelist: ['isAuthLogin', 'isMainLogin', 'userData'],
+    // blacklist: ["authButtonSpinner", "authSpinnerStatus"] // only navigation will be persisted
+};
 const authenticationReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SIGN_UP_CLICK:
@@ -42,4 +50,4 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
             return state;
     }
 }
-export default authenticationReducer;
+export default persistReducer(persistConfig, authenticationReducer);
