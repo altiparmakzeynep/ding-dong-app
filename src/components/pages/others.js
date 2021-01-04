@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, FlatList} from 'react-native';
 import { connect } from 'react-redux';
-import { PhoneHeight, PhoneWidth } from '../../config/env';
+import { PhoneHeight, PhoneWidth } from '../config/env';
 
 
 

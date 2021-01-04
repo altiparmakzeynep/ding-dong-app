@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { responsiveSize } from './config/env';
+import { responsiveSize } from './components/config/env';
 import { Router, Stack, Scene, Drawer, Tabs } from 'react-native-router-flux';
 import signIn from './components/authentication/signIn';
 import signUp from './components/authentication/signUp';
@@ -17,7 +17,7 @@ class RouterComp extends Component {
              <Stack key="root" hideNavBar >
                 <Stack key="auth" hideNavBar >
                     <Scene 
-                        initial
+                        
                         hideNavBar
                         key="signIn"
                         component={signIn} />
@@ -28,7 +28,7 @@ class RouterComp extends Component {
                         component={signUp} />
                 </Stack> 
 
-                <Stack 
+                <Stack initial
                        navigationBarStyle={styles.navigationBar}
                        key= "main">
                          <Tabs

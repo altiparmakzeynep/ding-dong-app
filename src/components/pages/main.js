@@ -1,37 +1,46 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, FlatList, Image} from 'react-native';
 import { connect } from 'react-redux';
-import { PhoneHeight, PhoneWidth, responsiveSize } from '../../config/env';
+import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
+import { fetchCategories } from '../../actions/productsAction';
+import { Actions } from 'react-native-router-flux';
 
-const categories = [
-    { id: "1", title: "Vegetables", uri: 'https://elements-cover-images-0.imgix.net/51373f4d-4476-4e5f-84b6-dc6da9f72aff?auto=compress%2Cformat&fit=max&w=866&s=c9893d248afedadeb826ec8bcbd2baec' },
-    { id: "2", title: "Fruits", uri: 'https://elements-cover-images-0.imgix.net/a45c4e3f-afdb-4306-8ae5-7cead4d27492?auto=compress%2Cformat&fit=max&w=866&s=8c1ef43b7431de72b52c436e33d6060d' },
-    { id: "3", title: "Beverages", uri: 'https://elements-cover-images-0.imgix.net/0a85cf97-4406-4717-bcd0-b2f9486400ce?auto=compress%2Cformat&fit=max&w=866&s=6a7b693fcb679a7d2a52c0cc643a4307' },
-    { id: "4", title: "Snacks", uri: 'https://elements-cover-images-0.imgix.net/b24ed75a-c880-4d4a-bb67-910dee412fc8?auto=compress%2Cformat&fit=max&w=866&s=03ca271935ff81395e899b0c1f58e612' },
-    { id: "5", title: "Cosmetics", uri: 'https://elements-cover-images-0.imgix.net/91a241e1-289c-4646-a7eb-7702e17fc20f?auto=compress%2Cformat&fit=max&w=866&s=d00b2406f2acb02ef142a4803c9a6c8c'},
-    { id: "6", title: "Homecare", uri: 'https://elements-cover-images-0.imgix.net/327fc7a7-171a-4d7a-b1ed-6a679f576f0e?auto=compress%2Cformat&fit=max&w=866&s=b1348237ea86cbbb4820e26976b9e94e'}
-]
+// const categories = [
+//     { id: "1", title: "Vegetables", uri: 'https://elements-cover-images-0.imgix.net/51373f4d-4476-4e5f-84b6-dc6da9f72aff?auto=compress%2Cformat&fit=max&w=866&s=c9893d248afedadeb826ec8bcbd2baec' },
+//     { id: "2", title: "Fruits", uri: 'https://elements-cover-images-0.imgix.net/a45c4e3f-afdb-4306-8ae5-7cead4d27492?auto=compress%2Cformat&fit=max&w=866&s=8c1ef43b7431de72b52c436e33d6060d' },
+//     { id: "3", title: "Beverages", uri: 'https://elements-cover-images-0.imgix.net/0a85cf97-4406-4717-bcd0-b2f9486400ce?auto=compress%2Cformat&fit=max&w=866&s=6a7b693fcb679a7d2a52c0cc643a4307' },
+//     { id: "4", title: "Snacks", uri: 'https://elements-cover-images-0.imgix.net/b24ed75a-c880-4d4a-bb67-910dee412fc8?auto=compress%2Cformat&fit=max&w=866&s=03ca271935ff81395e899b0c1f58e612' },
+//     { id: "5", title: "Cosmetics", uri: 'https://elements-cover-images-0.imgix.net/91a241e1-289c-4646-a7eb-7702e17fc20f?auto=compress%2Cformat&fit=max&w=866&s=d00b2406f2acb02ef142a4803c9a6c8c'},
+//     { id: "6", title: "Homecare", uri: 'https://elements-cover-images-0.imgix.net/327fc7a7-171a-4d7a-b1ed-6a679f576f0e?auto=compress%2Cformat&fit=max&w=866&s=b1348237ea86cbbb4820e26976b9e94e'}
+// ]
 
 class main extends Component {
+    componentWillMount() {
+        this.props.fetchCategories()
+      }
     constructor(props) {
-        super(props);
+        super();
     }
 categoriesRenderItem = ({item}) =>{
     return(
         <View >
-            <TouchableOpacity style= {styles.categories}>
+            <TouchableOpacity 
+                onPress={() => this.props.fetchCategories(item.id) & Actions.products({cat_id: item.id})}
+                style= {styles.categories}>
             <Image
                     style={{ borderRadius:14, height: PhoneHeight * 0.13, width: PhoneWidth * 0.25,}}
                         source={{
-                          uri : item.uri
+                          uri : item.image
                         }}
                     />
-                {/* <Text style= {styles.categoriesTitle}>{item.title}</Text> */}
+                <Text style= {styles.categoriesTitle}>{item.title}</Text>
             </TouchableOpacity>
          </View>
     )
 }
   render() {
+    const { categoriesValue } = this.props;
+
     return(
         <View style= {styles.container}>
          <View style= {styles.topContainer}>
@@ -43,7 +52,7 @@ categoriesRenderItem = ({item}) =>{
              <Text style= {styles.categoriesText}>Categories</Text>
             <FlatList 
                 numColumns= {3}
-                data={categories}  
+                data={categoriesValue}  
                 renderItem={this.categoriesRenderItem}/>
          </View>
         </View>
@@ -101,4 +110,19 @@ const styles = StyleSheet.create({
     }
 
 })
-export default main;
+const mapStateToProps = state => {
+    const { categoriesValue,cat_id } = state.productsReducer;
+
+    return {
+      categoriesValue,
+      cat_id
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {
+      fetchCategories,
+      
+    }
+  )(main)

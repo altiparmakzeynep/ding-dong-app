@@ -1,6 +1,6 @@
 import React, { Component } from 'react';;
 import { View, TextInput, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
-import { responsiveSize, PhoneHeight, PhoneWidth } from '../../config/env';
+import { responsiveSize, PhoneHeight, PhoneWidth } from '../config/env';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { signUpClicked } from '../../actions/authenticationAction';
