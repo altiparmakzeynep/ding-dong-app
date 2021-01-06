@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, FlatList, Image} from 'react-native';
 import { connect } from 'react-redux';
 import { PhoneHeight, PhoneWidth, responsiveSize} from '../config/env';
-import { fetchCategories, fetchSubCategories, fetchProducts } from '../../actions/productsAction';
+import { fetchCategories, fetchSubCategories, fetchProducts, addToCart } from '../../actions/productsAction';
 
 // const categories = [
 //     { id: "1", title: "Vegetables" },
@@ -184,6 +184,6 @@ export default connect(
     fetchCategories,
     fetchSubCategories,
     fetchProducts,
-    // addToCart
+    addToCart
   }
 )(main) ;

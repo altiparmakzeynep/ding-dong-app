@@ -47,7 +47,7 @@ class RouterComp extends Component {
                                 icon={({focused}) => (
                                     <Image style={styles.tabIcon} source={focused ? require('./images/loupe.png'):require('./images/loupe.png')} />)}
                                 component={search} />
-                            <Scene
+                            <Scene 
                                 key="cart"
                                 title="CART"
                                 icon={({focused}) => (
@@ -65,9 +65,10 @@ class RouterComp extends Component {
                             hideNavBar
                             key="cart"
                             component={cart} />
-                        <Scene 
-                            hideNavBar
+
+                        <Scene initial
                             key="search"
+                            title= "SEARCH"
                             component={search} />
                         <Scene 
                             hideNavBar
