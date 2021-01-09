@@ -5,14 +5,12 @@ import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { fetchCategories } from '../../actions/productsAction';
 import { Actions } from 'react-native-router-flux';
 
-// const categories = [
-//     { id: "1", title: "Vegetables", uri: 'https://elements-cover-images-0.imgix.net/51373f4d-4476-4e5f-84b6-dc6da9f72aff?auto=compress%2Cformat&fit=max&w=866&s=c9893d248afedadeb826ec8bcbd2baec' },
-//     { id: "2", title: "Fruits", uri: 'https://elements-cover-images-0.imgix.net/a45c4e3f-afdb-4306-8ae5-7cead4d27492?auto=compress%2Cformat&fit=max&w=866&s=8c1ef43b7431de72b52c436e33d6060d' },
-//     { id: "3", title: "Beverages", uri: 'https://elements-cover-images-0.imgix.net/0a85cf97-4406-4717-bcd0-b2f9486400ce?auto=compress%2Cformat&fit=max&w=866&s=6a7b693fcb679a7d2a52c0cc643a4307' },
-//     { id: "4", title: "Snacks", uri: 'https://elements-cover-images-0.imgix.net/b24ed75a-c880-4d4a-bb67-910dee412fc8?auto=compress%2Cformat&fit=max&w=866&s=03ca271935ff81395e899b0c1f58e612' },
-//     { id: "5", title: "Cosmetics", uri: 'https://elements-cover-images-0.imgix.net/91a241e1-289c-4646-a7eb-7702e17fc20f?auto=compress%2Cformat&fit=max&w=866&s=d00b2406f2acb02ef142a4803c9a6c8c'},
-//     { id: "6", title: "Homecare", uri: 'https://elements-cover-images-0.imgix.net/327fc7a7-171a-4d7a-b1ed-6a679f576f0e?auto=compress%2Cformat&fit=max&w=866&s=b1348237ea86cbbb4820e26976b9e94e'}
-// ]
+const data = [
+  { id: "1", title: "bu bir kampanya", backgroundColor: '#fefddb',uri:'https://envato-shoebox-0.imgix.net/0d80/552a-aceb-4181-bf08-49c70144d9e5/Goods-35.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=2f6fc6c7c3d02481ddd5a74a401fc4f7'  },
+  { id: "2", title: "bu bir kampanya", backgroundColor: '#fbe8e7',uri:'https://envato-shoebox-0.imgix.net/8f42/9f4c-983e-4bf6-a731-22aaa077a810/IMG_7912.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=ee3910220eb35658fe4081fff890a79d'},
+  { id: "3", title: "bu bir kampanya", backgroundColor: '##f2e5fd', uri:'https://envato-shoebox-0.imgix.net/673e/e016-3db3-46fd-880e-c15f03db6666/smporidge3.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=b7faa4619db6f2eba586f9a7fb36c98c' },
+  { id: "4", title: "bu bir kampanya", backgroundColor: '#dff3fe', uri:'https://envato-shoebox-0.imgix.net/0d80/552a-aceb-4181-bf08-49c70144d9e5/Goods-35.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=2f6fc6c7c3d02481ddd5a74a401fc4f7' },
+]
 
 class main extends Component {
     componentWillMount() {
@@ -21,6 +19,23 @@ class main extends Component {
     constructor(props) {
         super();
     }
+
+cardRenderItem = ({ item }) => {
+  return (
+    <TouchableOpacity style = {styles.seperateCards}>
+    <View style={[styles.cardWrapper, { backgroundColor: item.backgroundColor }]}>
+    <Image
+                  style={{ borderRadius:26, height: PhoneHeight * 0.25, width: PhoneWidth * 0.8,}}
+                      source={{
+                        uri : item.uri
+                      }}
+                  />
+      <Text style={styles.cardTitle}> {item.title} </Text>
+    </View>
+    </TouchableOpacity>
+    
+  )
+}
 categoriesRenderItem = ({item}) =>{
     return(
         <View >
@@ -28,7 +43,7 @@ categoriesRenderItem = ({item}) =>{
                 onPress={() => this.props.fetchCategories(item.id) & Actions.products({cat_id: item.id})}
                 style= {styles.categories}>
             <Image
-                    style={{ borderRadius:14, height: PhoneHeight * 0.13, width: PhoneWidth * 0.25,}}
+                    style={{ borderRadius:14, height: PhoneHeight * 0.1, width: PhoneWidth * 0.25,}}
                         source={{
                           uri : item.image
                         }}
@@ -46,6 +61,7 @@ categoriesRenderItem = ({item}) =>{
          <View style= {styles.topContainer}>
           <TouchableOpacity style= {styles.topAddress}>
            <Text style= {styles.topAddresText}> ADRESS</Text>
+         
           </TouchableOpacity>
          </View>
          <View style= {styles.bottomContainer}>
@@ -61,34 +77,41 @@ categoriesRenderItem = ({item}) =>{
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: "#F4FFF1",
-        alignItems: "center"
+      flex: 1,
+      backgroundColor: "#F4FFF1",
+      alignItems: "center"
     },
     topContainer:{
-        borderWidth: 0,
-        padding: PhoneHeight * 0.04, 
-        alignItems: "center",
-        width: PhoneWidth,
-        height: PhoneHeight * 0.45
+      borderWidth: 0,
+      padding: PhoneHeight * 0.04, 
+      width: PhoneWidth,
+      height: PhoneHeight * 0.45
     },
     bottomContainer:{
-        borderWidth: 0,
-        width: PhoneWidth,
-        height: PhoneHeight * 0.4
+      borderWidth: 1,
+      width: PhoneWidth,
+      height: PhoneHeight * 0.4
     },
     categoriesText:{
-       color: "#1F4B09",
-       marginLeft: PhoneWidth * 0.06,
-       fontSize: responsiveSize(20)
+      color: "#1F4B09",
+      marginLeft: PhoneWidth * 0.06,
+      fontSize: responsiveSize(20)
     },
     topAddress:{
-        justifyContent: "center",
-        borderWidth: 0,
-        backgroundColor: "#fff",
-        borderRadius: 24,
-        width: PhoneWidth * 0.75,
-        height: PhoneHeight * 0.05
+      justifyContent: "center",
+      borderWidth: 0,
+      backgroundColor: "#fff",
+      borderRadius: 24,
+      width: PhoneWidth * 0.75,
+      height: PhoneHeight * 0.05,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
     },
     topAddresText:{
       color: "#1b7e00",
@@ -96,18 +119,28 @@ const styles = StyleSheet.create({
       fontSize: responsiveSize(18)
     },
     categories:{
-     borderWidth: 0,
-     marginTop: PhoneHeight * 0.03,
-     marginLeft: PhoneWidth * 0.06,
-     width: PhoneWidth * 0.25,
-     height: PhoneHeight * 0.13,
-     borderRadius: 14,
-     backgroundColor: "white"
-    },
+      borderWidth: 0,
+      marginTop: PhoneHeight * 0.02,
+      marginLeft: PhoneWidth * 0.06,
+      width: PhoneWidth * 0.25,
+      height: PhoneHeight * 0.13,
+      borderRadius: 14,
+      backgroundColor: "white",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
+  
+   },
     categoriesTitle:{
-        alignSelf: "center",
-        fontSize: responsiveSize(13)
-    }
+      alignSelf: "center",
+      fontSize: responsiveSize(13),
+
+    },
 
 })
 const mapStateToProps = state => {

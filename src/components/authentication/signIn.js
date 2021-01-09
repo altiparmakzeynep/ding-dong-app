@@ -81,7 +81,15 @@ const styles = StyleSheet.create({
         width: PhoneWidth * 0.7,
         height: PhoneHeight * 0.05,
         backgroundColor: "white",
-        textAlign: "center"
+        textAlign: "center",
+        shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7
     },
     loginButtonContainer:{
       borderWidth: 0,
@@ -96,6 +104,14 @@ const styles = StyleSheet.create({
       backgroundColor: "#1b7e00",
       width: PhoneWidth * 0.45,
       height: PhoneHeight * 0.05,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
     },
     loginText:{
       color: "#fff",

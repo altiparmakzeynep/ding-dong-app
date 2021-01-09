@@ -4,15 +4,6 @@ import { connect } from 'react-redux';
 import { PhoneHeight, PhoneWidth, responsiveSize} from '../config/env';
 import { fetchCategories, fetchSubCategories, fetchProducts, addToCart } from '../../actions/productsAction';
 
-// const categories = [
-//     { id: "1", title: "Vegetables" },
-//     { id: "2", title: "Fruits" },
-//     { id: "3", title: "Beverages" },
-//     { id: "4", title: "Snacks" },
-//     { id: "5", title: "Cosmetics" },
-//     { id: "6", title: "Homecare" }
-// ]
-
 
 class main extends Component {
   componentWillMount() {
@@ -47,6 +38,11 @@ productRenderItem = ({ item }) => {
         <Text style= {{fontSize: responsiveSize(10)}}>{item.desc}</Text>
         </View>
         <View style= {styles.priceTextContainer}>
+        <TouchableOpacity style= {styles.favIconContainer}>
+          <Image 
+            source={require('../../images/emptyHeart.png')}
+            style= {styles.favIcon}/>
+        </TouchableOpacity>
         <Text style= {styles.priceTxt}> {item.price} {item.amount}</Text>
         </View>
     </TouchableOpacity> 
@@ -119,6 +115,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#a2a2a2",
         // marginLeft: PhoneHeight * 0.01,
         // marginTop: PhoneHeight * 0.02,
+        
       },
 
       productImages:{
@@ -166,6 +163,18 @@ const styles = StyleSheet.create({
         width: responsiveSize(15),
         height: responsiveSize(15),
         alignSelf: "center",
+      },
+      favIconContainer:{
+        width: responsiveSize(15),
+        height: responsiveSize(15),
+        borderWidth: 0,
+        marginLeft: PhoneWidth * 0.02
+        // marginTop: PhoneHeight * 0.05
+      },
+      favIcon:{
+        justifyContent: "flex-start",
+        width: responsiveSize(15),
+        height: responsiveSize(15)
       }
 })
 export const mapStateToProps = state => {
