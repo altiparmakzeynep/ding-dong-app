@@ -20,22 +20,6 @@ class main extends Component {
         super();
     }
 
-cardRenderItem = ({ item }) => {
-  return (
-    <TouchableOpacity style = {styles.seperateCards}>
-    <View style={[styles.cardWrapper, { backgroundColor: item.backgroundColor }]}>
-    <Image
-                  style={{ borderRadius:26, height: PhoneHeight * 0.25, width: PhoneWidth * 0.8,}}
-                      source={{
-                        uri : item.uri
-                      }}
-                  />
-      <Text style={styles.cardTitle}> {item.title} </Text>
-    </View>
-    </TouchableOpacity>
-    
-  )
-}
 categoriesRenderItem = ({item}) =>{
     return(
         <View >
@@ -61,7 +45,12 @@ categoriesRenderItem = ({item}) =>{
          <View style= {styles.topContainer}>
           <TouchableOpacity style= {styles.topAddress}>
            <Text style= {styles.topAddresText}> ADRESS</Text>
-         
+           <View style= {styles.firstCampaign}></View>
+           <View style= {styles.secondCampaign}></View>
+           <View style= {styles.thirdCampaign}></View>
+           <View style= {styles.fourthCampaign}></View>
+           <View>
+           </View>
           </TouchableOpacity>
          </View>
          <View style= {styles.bottomContainer}>
@@ -85,10 +74,11 @@ const styles = StyleSheet.create({
       borderWidth: 0,
       padding: PhoneHeight * 0.04, 
       width: PhoneWidth,
-      height: PhoneHeight * 0.45
+      height: PhoneHeight * 0.45,
     },
     bottomContainer:{
-      borderWidth: 1,
+      borderWidth: 0, 
+      borderColor: "aqua",
       width: PhoneWidth,
       height: PhoneHeight * 0.4
     },
@@ -125,8 +115,7 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.25,
       height: PhoneHeight * 0.13,
       borderRadius: 14,
-      backgroundColor: "white",
-      shadowColor: "#000",
+      backgroundColor: "#fff",
       shadowOffset: {
         width: 0,
         height: 3,
@@ -134,13 +123,48 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.29,
       shadowRadius: 4.65,
       elevation: 7,
-  
    },
     categoriesTitle:{
       alignSelf: "center",
       fontSize: responsiveSize(13),
-
     },
+    firstCampaign:{
+      borderWidth: 1,
+      borderRadius: 19,
+      width: PhoneWidth * 0.3,
+      height: PhoneHeight * 0.2,
+      top: PhoneHeight * 0.07,
+      position: "absolute",
+      justifyContent: "flex-start"
+    },
+    secondCampaign:{
+      borderWidth: 1,
+      borderColor: "red",
+      borderRadius: 19,
+      width: PhoneWidth * 0.3,
+      height: PhoneHeight * 0.1,
+      top: PhoneHeight * 0.45,
+    },
+    thirdCampaign:{
+      borderWidth: 1,
+      borderColor: "aqua",
+      borderRadius: 19,
+      width: PhoneWidth * 0.5,
+      height: PhoneHeight * 0.1,
+      top: PhoneHeight * 0.13,
+      marginLeft: PhoneWidth * 0.35,
+    },
+    fourthCampaign:{
+      borderWidth: 1,
+      borderColor: "orange",
+      borderRadius: 19,
+      width: PhoneWidth * 0.5,
+      height: PhoneHeight * 0.2,
+      marginLeft: PhoneWidth * 0.35,
+      top: PhoneHeight * 0.15,
+
+    }
+  
 
 })
 const mapStateToProps = state => {

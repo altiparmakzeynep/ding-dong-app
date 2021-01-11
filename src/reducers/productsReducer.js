@@ -11,6 +11,7 @@ const INITIAL_STATE =  {
     subCategoriesValue: [],
     productsValue: [],
     cat_id: "",
+    product_id: "",
     products: [],
     productsLength:0,
     totalAmount: 0
@@ -30,9 +31,11 @@ export default ( state = INITIAL_STATE, action) => {
                 subCategoriesValue: action.payload,
             }
         case FETCH_PRODUCTS:
+            console.log("okan aklıma geldi", action.payload.id)
             return {
                 ...state,
-                productsValue: action.payload
+                productsValue: action.payload,
+                product_id: action.payload.item_id
             }
         case ADD_TO_CART:
             console.log(action.payload.price)

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         justifyContent: "center",
-        borderWidth: 1,
+        borderWidth: 0,
         width: PhoneWidth,
         height: PhoneHeight * 0.1
     },

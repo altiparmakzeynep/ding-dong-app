@@ -190,28 +190,37 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.6,
       height: PhoneHeight * 0.05,
       borderRadius: 11,
-      marginBottom: PhoneHeight * 0.02,//aşağıyla arasına cok hafif bosluk vermeye yarar
+      marginBottom: PhoneHeight * 0.04,//aşağıyla arasına cok hafif bosluk vermeye yarar
       alignSelf: "center",//kendini ort.
       alignItems:'center',//içindeki yazıyı yatayda ort.
       justifyContent:'center'//içindeki yazıyı dikeyde ort.
     },
     totalCartBtn:{
-      borderWidth: 1,
+      borderWidth: 0,
       width: PhoneWidth * 0.35,
       height: PhoneHeight * 0.05,
       borderRadius: 11,
-      borderColor: "#1B7E00",
+      backgroundColor: "#fff",
       justifyContent:'center',//içindeki yazıyı dikeyde ort.
       marginBottom: PhoneHeight * 0.01,
-      marginLeft: PhoneHeight * 0.3
+      marginLeft: PhoneHeight * 0.3,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
     },
     confirmTxt:{
       color:"#fff",
       fontSize:responsiveSize(17)
       },
     totalTxt:{
-      color:"#000",
-      fontSize:responsiveSize(13),
+      color:"#1B7E00",
+      alignSelf: "center",
+      fontSize:responsiveSize(18),
       marginLeft: PhoneHeight * 0.01
     },
     deleteAllPhoto:{

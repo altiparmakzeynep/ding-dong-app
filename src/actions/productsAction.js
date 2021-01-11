@@ -21,7 +21,7 @@ export const fetchCategories = (item) => {
             console.log("kategoriler geldi canim", item)
             dispatch({
                 type: FETCH_CATEGORIES,
-                payload: {data: result.data.data, cat_id:item}
+                payload: {data: result.data.data, cat_id:item }
             })
         }).catch((err) => {
             console.log("kategori gelmedi canim");

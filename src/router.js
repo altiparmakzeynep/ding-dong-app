@@ -7,9 +7,10 @@ import signUp from './components/authentication/signUp';
 import main from './components/pages/main';
 import cart from './components/pages/cart';
 import search from './components/pages/search';
-import others from './components/pages/others';
+import favourites from './components/pages/favourites';
 import products from './components/pages/products';
-import payment from './components/pages/payment'
+import payment from './components/pages/payment';
+import productsInfo from './components/pages/productsInfo';
 
 class RouterComp extends Component {
     render() {
@@ -65,11 +66,11 @@ class RouterComp extends Component {
                                     <Image style={styles.tabIcon} source={focused ? require('./images/groceries.png'):require('./images/groceries.png')} />)}
                                 component={cart} />
                             <Scene
-                                key="others"
-                                title="OTHERS"
+                                key="favourites"
+                                title="FAVOURITES"
                                 icon={({focused}) => (
-                                    <Image style={styles.tabIcon} source={focused ? require('./images/menu.png'):require('./images/menu.png')} />)}
-                                component={others} />
+                                    <Image style={styles.tabIcon} source={focused ? require('./images/fulHeart.png'):require('./images/fulHeart.png')} />)}
+                                component={favourites} />
                          </Tabs>
                        
                         <Scene 
@@ -82,8 +83,8 @@ class RouterComp extends Component {
                             component={search} />
                         <Scene 
                             hideNavBar
-                            key="others"
-                            component={others} />  
+                            key="favourites"
+                            component={favourites} />  
                         <Scene  
                             key= "products"
                             title= "PRODUCTS"
@@ -93,6 +94,11 @@ class RouterComp extends Component {
                             key= "payment"
                             title= "PAYMENT"
                             component={payment} /> 
+                        <Scene  
+                            
+                            key= "productsInfo"
+                            title= "PRODUCT"
+                            component={productsInfo} /> 
                        
                             
                 </Stack>

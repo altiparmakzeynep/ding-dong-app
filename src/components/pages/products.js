@@ -3,11 +3,13 @@ import { View, StyleSheet, TouchableOpacity, Text, FlatList, Image} from 'react-
 import { connect } from 'react-redux';
 import { PhoneHeight, PhoneWidth, responsiveSize} from '../config/env';
 import { fetchCategories, fetchSubCategories, fetchProducts, addToCart } from '../../actions/productsAction';
+import { Actions } from 'react-native-router-flux';
 
 
 class main extends Component {
   componentWillMount() {
     this.props.fetchSubCategories(this.props.cat_id)
+    this.props.fetchProducts(this.props.product_id)
   }
     constructor(props) {
         super(props);
@@ -24,11 +26,15 @@ subCategoriesRenderItem = ({item}) => {
   </View>
   )
 }
-
+// zeynep = (item) => {
+// console.log("rüüüüü", item.id)
+// }
 productRenderItem = ({ item }) => {
   return(
     <View style= {styles.allProducts}>
-      <TouchableOpacity style= {styles.productContainer}>
+      <TouchableOpacity 
+          onPress={() => this.props.fetchProducts(item.id)}
+          style= {styles.productContainer}>
         <Image style= {styles.productImages} 
                source={{
                 uri : item.image
@@ -115,7 +121,14 @@ const styles = StyleSheet.create({
         borderBottomColor: "#a2a2a2",
         // marginLeft: PhoneHeight * 0.01,
         // marginTop: PhoneHeight * 0.02,
-        
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
       },
 
       productImages:{
@@ -156,7 +169,15 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 24,
         borderBottomWidth: 0,
         borderWidth:0,
-        justifyContent: "center"
+        justifyContent: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
 
       },
       plusIcon:{
