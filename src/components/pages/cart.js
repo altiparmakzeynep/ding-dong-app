@@ -15,65 +15,64 @@ import { Actions } from 'react-native-router-flux';
   }
  cartRenderItem = ({ item }) => {
     return(
-<View style= {styles.allProducts}>
-  <View style= {styles.productContainer}>
-    <View style= {styles.imageContainer}>
-          <Image style= {styles.productImages} 
-                source={{
-                  uri : item.image
-                }}/>  
-          <View style= {styles.textInfoContainer}>
-                <Text style= {styles.productNameTxt}>{item.title}</Text>
-                <Text style= {styles.priceTxt}> {item.price} {item.amount} </Text>
-          </View>  
-      <View style= {styles.plusAndMinusContainer}>  
-          <View style= {styles.amountContainer}>
-                  <TouchableOpacity 
-                     onPress= {() => this.setState({ counter: this.state.counter - 1})}
-                     style= {styles.plusContainer}>
-                     <Image 
-                      style= {styles.minusIcon}
-                      source= {require("../../images/minus.png")}/>
+      <View style= {styles.allProducts}>
+        <View style= {styles.productContainer}>
+          <View style= {styles.imageContainer}>
+                <Image style= {styles.productImages} 
+                      source={{
+                        uri : item.image
+                      }}/>  
+                <View style= {styles.textInfoContainer}>
+                      <Text style= {styles.productNameTxt}>{item.title}</Text>
+                      <Text style= {styles.priceTxt}> {item.price} {item.amount} </Text>
+                </View>  
+            <View style= {styles.plusAndMinusContainer}>  
+                <View style= {styles.amountContainer}>
+                        <TouchableOpacity 
+                          onPress= {() => this.setState({ counter: this.state.counter - 1})}
+                          style= {styles.plusContainer}>
+                          <Image 
+                            style= {styles.minusIcon}
+                            source= {require("../../images/minus.png")}/>
+                        </TouchableOpacity>
+                        <View style= {styles.amountTxt}>
+                          <Text> {this.state.counter} </Text>
+                        </View>
+                        <TouchableOpacity 
+                            onPress= {() => this.setState({ counter: this.state.counter + 1})}
+                            style= {styles.minusContainer}>
+                            <Image 
+                              style= {styles.plusIcon}
+                              source= {require("../../images/plus1.png")}/>
+                        </TouchableOpacity>  
+                </View> 
+                <View style= {styles.deleteContainer}>
+                  <TouchableOpacity
+                  onPress= {() => this.props.removeToCart(item) } >
+                    <Image 
+                      style= {styles.deleteIcon}
+                      source= {require("../../images/trash-can.png")}/>
                   </TouchableOpacity>
-                  <View style= {styles.amountTxt}>
-                    <Text> {this.state.counter} </Text>
-                  </View>
-                  <TouchableOpacity 
-                       onPress= {() => this.setState({ counter: this.state.counter + 1})}
-                       style= {styles.minusContainer}>
-                       <Image 
-                        style= {styles.plusIcon}
-                        source= {require("../../images/plus1.png")}/>
-                  </TouchableOpacity>  
-          </View> 
-          <View style= {styles.deleteContainer}>
-            <TouchableOpacity
-             onPress= {() => this.props.removeToCart(item) } >
-              <Image 
-                style= {styles.deleteIcon}
-                source= {require("../../images/trash-can.png")}/>
-             </TouchableOpacity>
-          </View>   
-      </View> 
-    </View>
-  </View>
-</View>
+                </View>   
+            </View> 
+          </View>
+        </View>
+      </View>
     )
   }
   render() {
     const {products, totalAmount} = this.props;
-    console.log("sepetteki ürünler: ", products)
     return (
       <View style= {styles.container}>
-      {     //sepette ürün bulunmadığı durumları kontrol eder tasarımı eksik yapılacak 
+      {     // It checks products which in cart
         this.props.products.length > 0 ?
        <Text> </Text> 
-        :<Text style= {styles.cartIsEmptyTxt}>Sepetinizde ürün bulunmamaktadır.</Text> 
+        :<Text style= {styles.cartIsEmptyTxt}>There are no items in your cart.</Text> 
       }
         <View style={styles.deleteAllContainer}>
           <TouchableOpacity 
             onPress= {this.props.removeAllCart}
-            style= {styles.deleteAllBtn}> 
+            style= {{ padding:10 }}> 
            <Image 
             style= {styles.deleteAllPhoto}
            />
@@ -127,8 +126,6 @@ const styles = StyleSheet.create({
     amountContainer:{
       height: PhoneHeight * 0.03,
       width: PhoneWidth * 0.2,
-      // borderWidth:0,
-      // borderColor: "#1B7E00",
     },
     plusContainer:{
       borderWidth: 0,
@@ -141,12 +138,12 @@ const styles = StyleSheet.create({
       justifyContent: "center"
     },
     amountTxt:{
-       borderWidth: 1,
-       width: PhoneHeight * 0.04,
-       height: PhoneHeight * 0.027,
-       alignSelf: "center",
-       alignItems: "center",
-       borderColor: "#1B7E00"
+      borderWidth: 1,
+      width: PhoneHeight * 0.04,
+      height: PhoneHeight * 0.027,
+      alignSelf: "center",
+      alignItems: "center",
+      borderColor: "#1B7E00"
     },
     minusContainer:{
       borderWidth: 0,
@@ -163,18 +160,18 @@ const styles = StyleSheet.create({
       borderWidth:0,
       height: PhoneHeight * 0.1,
       width: PhoneWidth * 0.24,
-      paddingHorizontal:10,//sağındaki foto ile arasına 10px boşluk verir
-      justifyContent: "center",//dikeyde yazıyı ve fiyatı ortalar
+      paddingHorizontal:10,
+      justifyContent: "center",
     },
-    plusAndMinusContainer:{//artı ve eksi sembollerinin kutusunu bir view e aldım ki marginsiz ortalayabileyim diye
-      flexDirection:'row',// artı, eksi, ve çarpıyı yan yana dizer.
-      marginTop: PhoneHeight*0.03,//3'ünü de dikeyde ortalar. ,
+    plusAndMinusContainer:{
+      flexDirection:'row',
+      marginTop: PhoneHeight*0.03,
       borderWidth: 0
     },
     plusIcon:{
-     alignSelf: "center",
-     width: responsiveSize(10),
-     height: responsiveSize(10)
+      alignSelf: "center",
+      width: responsiveSize(10),
+      height: responsiveSize(10)
     },
     minusIcon:{
       alignSelf: "center",
@@ -189,14 +186,13 @@ const styles = StyleSheet.create({
     },
     imageContainer:{
       borderRadius: 24,
-      flexDirection:'row',//ımage containerın içindeki her şeyi yatay dizer!!!
+      flexDirection:'row',
     },
     productImages:{
       width: PhoneWidth * 0.2,
       height: PhoneHeight * 0.095,
       borderRadius: 24,
     },
- 
     deleteContainer:{
       height: PhoneHeight * 0.027,
       width: PhoneWidth * 0.07,
@@ -215,10 +211,10 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.6,
       height: PhoneHeight * 0.05,
       borderRadius: 11,
-      marginBottom: PhoneHeight * 0.04,//aşağıyla arasına cok hafif bosluk vermeye yarar
-      alignSelf: "center",//kendini ort.
-      alignItems:'center',//içindeki yazıyı yatayda ort.
-      justifyContent:'center'//içindeki yazıyı dikeyde ort.
+      marginBottom: PhoneHeight * 0.04,
+      alignSelf: "center",
+      alignItems:'center',
+      justifyContent:'center'
     },
     totalCartBtn:{
       borderWidth: 0,
@@ -226,7 +222,7 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.05,
       borderRadius: 11,
       backgroundColor: "#fff",
-      justifyContent:'center',//içindeki yazıyı dikeyde ort.
+      justifyContent:'center',
       marginBottom: PhoneHeight * 0.01,
       marginLeft: PhoneHeight * 0.3,
       shadowColor: "#000",
@@ -241,7 +237,7 @@ const styles = StyleSheet.create({
     confirmTxt:{
       color:"#fff",
       fontSize:responsiveSize(17)
-      },
+    },
     totalTxt:{
       color:"#1B7E00",
       alignSelf: "center",
@@ -252,32 +248,26 @@ const styles = StyleSheet.create({
       width: responsiveSize(26),
       height: responsiveSize(26),
     },
-    deleteAllBtn:{
-      padding:10
-    },
     deleteAllContainer:{
       justifyContent:'flex-end',
       alignItems:'flex-end'
     },
     cartIsEmptyTxt:{
       alignSelf:'center',
-      
     }
-    })
-
-    const mapStateToProps = state => {
-      const { products, totalAmount  } = state.productsReducer;
-      return {
-        products,
-        totalAmount
-      }
-    }
-    
-    export default connect(
-      mapStateToProps,
-      {
-        removeToCart,
-        removeAllCart,
-        addToCart
-      }
-    )(cart)
+})
+const mapStateToProps = state => {
+  const { products, totalAmount  } = state.productsReducer;
+  return {
+    products,
+    totalAmount
+  }
+}
+export default connect(
+  mapStateToProps,
+  {
+    removeToCart,
+    removeAllCart,
+    addToCart
+  }
+)(cart)

@@ -24,20 +24,19 @@ onPasswordChanged = (value) => this.setState({passwordValue: value})
 onConfirmPasswordChanged = (value) => this.setState({confirmPasswordValue: value})
 
 onSignUp = () => {
-    console.log("bastı mı");
-    this.props.signUpClicked(this.state.fullNameValue, this.state.phoneNumberValue, this.state.emailValue, this.state.passwordValue )
+  console.log("clicked?");
+  this.props.signUpClicked(this.state.fullNameValue, this.state.phoneNumberValue, this.state.emailValue, this.state.passwordValue )
 }
-
     render() {
      return (
         <View style={styles.container}>
-         <View style= {styles.logoContainer}>
+          <View style= {styles.logoContainer}>
             <Image
                 style={styles.logo}
                 source={require('../../images/logo.png')}
                 />
           </View>
-          <View style= {styles.inputsContainer}>
+          <View style= {{ borderWidth: 0}}>
             <TextInput 
                 style={styles.input}
                 placeholder='name surname'
@@ -67,47 +66,49 @@ onSignUp = () => {
                 placeholder='password confirm'
                 placeholderTextColor='#00000029'
                 onChangeText={this.onConfirmPasswordChanged}/> 
-         </View>
-         <View style= {styles.signUpButtonContainer}>
+          </View>
+          <View style= {styles.signUpButtonContainer}>
              <TouchableOpacity 
                   onPress = {this.onSignUp}
                   style= {styles.signUpButton}>
                  <Text style= {styles.signUpButtonText}>sign up</Text>
              </TouchableOpacity>
-         </View>
-         <Text style= {{ top: PhoneHeight * 0.01 }}> Do you have an account? 
+          </View>
+          <Text style= {{ top: PhoneHeight * 0.01 }}> Do you have an account? 
              <Text style= {{ fontWeight: "bold" }} onPress= {() => Actions.signIn()}> Sign In </Text>
-            </Text>
+          </Text>
+          <View  style= {styles.dindong}>
+          <Image 
+            style= {styles.dingdong}
+            source={require('../../images/dingdong.png')}/>
+          </View>
         </View> 
     )
   }
 }
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#f4fff1"
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#f4fff1"
     },
     logo:{
-        marginBottom: "10%",
-        width: responsiveSize(100),
-        height: responsiveSize(100),
-        resizeMode: "contain"
+      marginBottom: "10%",
+      width: responsiveSize(100),
+      height: responsiveSize(100),
+      resizeMode: "contain"
       },
-    inputsContainer:{
-        borderWidth: 0
-    },
     input:{
-        borderTopWidth: 0, 
-        margin: PhoneHeight * 0.01, 
-        borderColor: "gray",
-        borderRadius: 24,
-        width: PhoneWidth * 0.7,
-        height: PhoneHeight * 0.05,
-        backgroundColor: "white",
-        textAlign: "center",
-        shadowColor: "#000",
+      borderTopWidth: 0, 
+      margin: PhoneHeight * 0.01, 
+      borderColor: "gray",
+      borderRadius: 24,
+      width: PhoneWidth * 0.7,
+      height: PhoneHeight * 0.05,
+      backgroundColor: "white",
+      textAlign: "center",
+      shadowColor: "#000",
       shadowOffset: {
         width: 0,
         height: 3,
@@ -117,20 +118,20 @@ const styles = StyleSheet.create({
       elevation: 7,
     },
     signUpButtonContainer:{
-        borderWidth: 0,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: PhoneHeight * 0.02,
+      borderWidth: 0,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: PhoneHeight * 0.02,
     },
     signUpButton:{
-        justifyContent: "center" ,
-        alignItems: "center",
-        backgroundColor: "#1b7e00",
-        borderWidth: 0,
-        borderRadius: 12,
-        width: PhoneWidth * 0.45,
-        height: PhoneHeight * 0.05,
-        shadowColor: "#000",
+      justifyContent: "center" ,
+      alignItems: "center",
+      backgroundColor: "#1b7e00",
+      borderWidth: 0,
+      borderRadius: 12,
+      width: PhoneWidth * 0.45,
+      height: PhoneHeight * 0.05,
+      shadowColor: "#000",
       shadowOffset: {
         width: 0,
         height: 3,
@@ -143,17 +144,22 @@ const styles = StyleSheet.create({
       color: "#fff",
       alignSelf: "center",
       fontSize: responsiveSize(15)
+    },
+    dingdong:{
+      marginTop:PhoneHeight * 0.06 ,
+      width: responsiveSize(200), 
+      height: responsiveSize(35), 
+      alignSelf: "center", 
+      position: "absolute"
     }
-
 })
-
 const mapStateToProps = (state) => {
     const { fullNameValue, phoneNumberValue, emailValue, passwordValue } = state.authenticationReducer;
     return {
-       fullNameValue,
-       phoneNumberValue,
-       emailValue,
-       passwordValue,
+      fullNameValue,
+      phoneNumberValue,
+      emailValue,
+      passwordValue,
     }
   }
   export default connect(

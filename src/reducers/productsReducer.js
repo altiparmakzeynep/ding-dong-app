@@ -8,7 +8,8 @@ import {
     REMOVE_ALL_CART,
     ADD_TO_FAVS,
     REMOVE_TO_FAVS
-} from '../actions/productsAction'
+} from '../actions/productsAction';
+
 const INITIAL_STATE =  {
     categoriesValue: [],
     subCategoriesValue: [],
@@ -56,7 +57,7 @@ export default ( state = INITIAL_STATE, action) => {
                 totalAmount: state.totalAmount + action.payload.price
             }
         case ADD_TO_FAVS:
-            console.log("arrrrr: " , action.payload)
+            console.log("favs array: " , action.payload)
             return { 
                 ...state,
                 favs: state.favs.concat(action.payload),
@@ -77,7 +78,6 @@ export default ( state = INITIAL_STATE, action) => {
 
             }
         case REMOVE_ALL_CART:
-            console.log("tamamını silme",action.payload);
             return {
                 ...state,
                 products: state.products.splice(action.payload,0),

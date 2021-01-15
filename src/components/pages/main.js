@@ -5,13 +5,6 @@ import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { fetchCategories } from '../../actions/productsAction';
 import { Actions } from 'react-native-router-flux';
 
-const data = [
-  { id: "1", title: "bu bir kampanya", backgroundColor: '#fefddb',uri:'https://envato-shoebox-0.imgix.net/0d80/552a-aceb-4181-bf08-49c70144d9e5/Goods-35.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=2f6fc6c7c3d02481ddd5a74a401fc4f7'  },
-  { id: "2", title: "bu bir kampanya", backgroundColor: '#fbe8e7',uri:'https://envato-shoebox-0.imgix.net/8f42/9f4c-983e-4bf6-a731-22aaa077a810/IMG_7912.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=ee3910220eb35658fe4081fff890a79d'},
-  { id: "3", title: "bu bir kampanya", backgroundColor: '##f2e5fd', uri:'https://envato-shoebox-0.imgix.net/673e/e016-3db3-46fd-880e-c15f03db6666/smporidge3.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=b7faa4619db6f2eba586f9a7fb36c98c' },
-  { id: "4", title: "bu bir kampanya", backgroundColor: '#dff3fe', uri:'https://envato-shoebox-0.imgix.net/0d80/552a-aceb-4181-bf08-49c70144d9e5/Goods-35.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=2f6fc6c7c3d02481ddd5a74a401fc4f7' },
-]
-
 class main extends Component {
     componentWillMount() {
         this.props.fetchCategories()
@@ -23,37 +16,47 @@ class main extends Component {
 categoriesRenderItem = ({item}) =>{
     return(
         <View >
-            <TouchableOpacity 
-                onPress={() => this.props.fetchCategories(item.id) & Actions.products({cat_id: item.id})}
-                style= {styles.categories}>
-            <Image
-                    style={{ borderRadius:14, height: PhoneHeight * 0.1, width: PhoneWidth * 0.25,}}
-                        source={{
-                          uri : item.image
-                        }}
-                    />
-                <Text style= {styles.categoriesTitle}>{item.title}</Text>
-            </TouchableOpacity>
+          <TouchableOpacity 
+              onPress={() => this.props.fetchCategories(item.id) & Actions.products({cat_id: item.id})}
+              style= {styles.categories}>
+          <Image
+              style={{ borderRadius:14, height: PhoneHeight * 0.1, width: PhoneWidth * 0.25,}}
+              source={{ uri : item.image }}/>
+            <Text style= {styles.categoriesTitle}>{item.title}</Text>
+          </TouchableOpacity>
          </View>
     )
 }
   render() {
     const { categoriesValue } = this.props;
-
     return(
         <View style= {styles.container}>
          <View style= {styles.topContainer}>
-          <TouchableOpacity style= {styles.topAddress}>
-           <Text style= {styles.topAddresText}> ADRESS</Text>
-           <View style= {styles.firstCampaign}></View>
-           <View style= {styles.secondCampaign}>
-             
+           <View style= {styles.firstPair}>
+             <TouchableOpacity onPress= { () => Actions.campaign()} style= {styles.firstAd}>
+             <Image
+              style= {{  width: PhoneWidth * 0.4, height: PhoneHeight * 0.2, borderRadius:19 }}
+              source={{uri: "https://elements-twenty20-photos-0.imgix.net/production/uploads/items/8f85d04f-ebc4-4dea-bb1b-3dcb87e02704/source?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=600&s=329c2af895efd5dda2019d201af4bd7a"}}/>
+             </TouchableOpacity>
+             <TouchableOpacity  onPress= { () => Actions.campaign()} style= {styles.secondAd}>
+             <Image
+              style= {{  width: PhoneWidth * 0.4, height: PhoneHeight * 0.2, borderRadius:19 }}
+              source={{uri: "https://envato-shoebox-0.imgix.net/4e1a/6834-79fb-4097-b224-1c3c13bb406c/kvartyra-helen-306.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=600&s=8b371f700d3da304583cc5139a7b8e3e"}}/>
+             </TouchableOpacity>
            </View>
-           <View style= {styles.thirdCampaign}></View>
-           <View style= {styles.fourthCampaign}></View>
-           <View>
+           <View style= {styles.secondPair}>
+           <TouchableOpacity  onPress= { () => Actions.campaign()} style= {styles.thirdAd}>
+           <Image
+              style= {{  width: PhoneWidth * 0.4, height: PhoneHeight * 0.2, borderRadius:19 }}
+              source={{uri: "https://elements-twenty20-photos-0.imgix.net/production/uploads/items/a1dcd272-ba68-4609-95ac-399c15775229/source?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=600&s=6ed400dcf83182e03e39e14cb74a718b"}}/>
+           </TouchableOpacity>
+           <TouchableOpacity  onPress= { () => Actions.campaign()} style= {styles.fourthAd}>
+           <Image
+              style= {{  width: PhoneWidth * 0.4, height: PhoneHeight * 0.2, borderRadius:19 }}
+              source={{uri: "https://envato-shoebox-0.imgix.net/3bbb/2629-c29b-49e2-b566-ee6b82f874ff/20160402-IMG_0075.JPG?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=400&s=8cc4ad934135fad82d3c0b354ee6fe5e"}}/>
+           </TouchableOpacity>
+
            </View>
-          </TouchableOpacity>
          </View>
          <View style= {styles.bottomContainer}>
              <Text style= {styles.categoriesText}>Categories</Text>
@@ -74,9 +77,82 @@ const styles = StyleSheet.create({
     },
     topContainer:{
       borderWidth: 0,
-      padding: PhoneHeight * 0.04, 
       width: PhoneWidth,
       height: PhoneHeight * 0.45,
+    },
+    firstPair:{
+      borderWidth: 0,
+      borderColor: "green",
+      width: PhoneWidth,
+      height: PhoneHeight * 0.225,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-around"
+    },
+    firstAd:{
+      borderWidth: 0,
+      borderRadius: 19,
+      width: PhoneWidth * 0.4,
+      height: PhoneHeight * 0.2,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
+    },
+    secondAd:{
+      borderWidth: 0,
+      borderRadius: 19,
+      width: PhoneWidth * 0.4,
+      height: PhoneHeight * 0.2,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
+    },
+    secondPair:{
+      borderWidth: 0,
+      borderColor: "pink",
+      width: PhoneWidth,
+      height: PhoneHeight * 0.225,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-around"
+    },
+    thirdAd:{
+      borderWidth: 0,
+      borderRadius: 19,
+      width: PhoneWidth * 0.4,
+      height: PhoneHeight * 0.2,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
+    },
+    fourthAd:{
+      borderWidth: 0,
+      borderRadius: 19,
+      width: PhoneWidth * 0.4,
+      height: PhoneHeight * 0.2,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
     },
     bottomContainer:{
       borderWidth: 0, 
@@ -130,58 +206,17 @@ const styles = StyleSheet.create({
       alignSelf: "center",
       fontSize: responsiveSize(13),
     },
-    firstCampaign:{
-      borderWidth: 1,
-      borderRadius: 19,
-      width: PhoneWidth * 0.3,
-      height: PhoneHeight * 0.2,
-      top: PhoneHeight * 0.07,
-      position: "absolute",
-      justifyContent: "flex-start"
-    },
-    secondCampaign:{
-      borderWidth: 1,
-      borderColor: "red",
-      borderRadius: 19,
-      width: PhoneWidth * 0.3,
-      height: PhoneHeight * 0.1,
-      top: PhoneHeight * 0.45,
-    },
-    thirdCampaign:{
-      borderWidth: 1,
-      borderColor: "aqua",
-      borderRadius: 19,
-      width: PhoneWidth * 0.5,
-      height: PhoneHeight * 0.1,
-      top: PhoneHeight * 0.13,
-      marginLeft: PhoneWidth * 0.35,
-    },
-    fourthCampaign:{
-      borderWidth: 1,
-      borderColor: "orange",
-      borderRadius: 19,
-      width: PhoneWidth * 0.5,
-      height: PhoneHeight * 0.2,
-      marginLeft: PhoneWidth * 0.35,
-      top: PhoneHeight * 0.15,
-
-    }
-  
-
 })
 const mapStateToProps = state => {
     const { categoriesValue,cat_id } = state.productsReducer;
-
     return {
       categoriesValue,
       cat_id
     }
   }
-  
   export default connect(
     mapStateToProps,
     {
-      fetchCategories,
-      
+      fetchCategories, 
     }
   )(main)

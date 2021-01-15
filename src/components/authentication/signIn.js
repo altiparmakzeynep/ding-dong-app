@@ -15,7 +15,7 @@ class signIn extends Component {
     }
 
   onSignIn = () => {
-    console.log("bastı")
+    console.log("clicked?")
     this.props.signInClicked(this.state.phoneNumberValue, this.state.passwordValue)
   }
     
@@ -54,16 +54,21 @@ class signIn extends Component {
              <Text style= {{ fontWeight: "bold" }} onPress= {() => Actions.signUp()}> Sign Up </Text>
             </Text>
           </View>
+          <View  style= {styles.dindong}>
+          <Image 
+            style= {styles.dingdong}
+            source={require('../../images/dingdong.png')}/>
+          </View>
         </View>   
       )
    }
 }
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#f4fff1",
-        justifyContent: "center",
+      flex: 1,
+      alignItems: "center",
+      backgroundColor: "#f4fff1",
+      justifyContent: "center",
     },
     logo:{
       marginBottom: "30%",
@@ -72,27 +77,27 @@ const styles = StyleSheet.create({
       resizeMode: "contain"
     },
     inputsContainer:{
-        borderWidth: 0,
-        justifyContent: "center",
-        alignItems: "center"
+      borderWidth: 0,
+      justifyContent: "center",
+      alignItems: "center"
     },
     input:{
-        borderTopWidth: 0, 
-        margin: PhoneHeight * 0.01, 
-        borderColor: "gray",
-        borderRadius: 24,
-        width: PhoneWidth * 0.7,
-        height: PhoneHeight * 0.05,
-        backgroundColor: "white",
-        textAlign: "center",
-        shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-      shadowOpacity: 0.29,
-      shadowRadius: 4.65,
-      elevation: 7
+      borderTopWidth: 0, 
+      margin: PhoneHeight * 0.01, 
+      borderColor: "gray",
+      borderRadius: 24,
+      width: PhoneWidth * 0.7,
+      height: PhoneHeight * 0.05,
+      backgroundColor: "white",
+      textAlign: "center",
+      shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7
     },
     loginButtonContainer:{
       borderWidth: 0,
@@ -120,8 +125,14 @@ const styles = StyleSheet.create({
       color: "#fff",
       alignSelf: "center",
       fontSize: responsiveSize(15)
+    },
+    dingdong:{
+      marginTop:PhoneHeight * 0.075 ,
+      width: responsiveSize(200), 
+      height: responsiveSize(35), 
+      alignSelf: "center", 
+      position: "absolute"
     }
- 
 })
 const mapStateToProps = state => {
     const { phoneNumberValue, passwordValue } = state.authenticationReducer;

@@ -11,12 +11,13 @@ import favourites from './components/pages/favourites';
 import products from './components/pages/products';
 import payment from './components/pages/payment';
 import productsInfo from './components/pages/productsInfo';
+import campaign from './components/pages/campaign';
 
 class RouterComp extends Component {
     render() {
          return (
             <Router>
-             <Stack  key="root" hideNavBar >
+             <Stack   key="root" hideNavBar >
                 <Stack key="auth" hideNavBar >
                     <Scene 
                         
@@ -99,7 +100,12 @@ class RouterComp extends Component {
                             key= "productsInfo"
                             title= "PRODUCT"
                             component={productsInfo} /> 
-                       
+                        <Scene  
+                            
+                            key= "campaign"
+                            title= "CAMPAIGN"
+                            component={campaign} /> 
+                
                             
                 </Stack>
              </Stack>
@@ -107,47 +113,47 @@ class RouterComp extends Component {
            )
        }
    }
-   const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     navigationBar: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#fff'
+      borderBottomWidth: 1,
+      borderBottomColor: '#fff'
     },
     tabs: {
-        borderTopWidth: 1,
-        borderTopColor: '#dfdfdf',
-        zIndex: 1,
+      borderTopWidth: 1,
+      borderTopColor: '#dfdfdf',
+      zIndex: 1,
     },
     tabIcon: {
-        width: responsiveSize(27),
-        height: responsiveSize(27),
+      width: responsiveSize(27),
+      height: responsiveSize(27),
     },
     appIconWrapper: {
-        backgroundColor: '#fff',
-        marginBottom: "35%",
-        borderRadius: 10,
-        alignSelf: 'center',
+      backgroundColor: '#fff',
+      marginBottom: "35%",
+      borderRadius: 10,
+      alignSelf: 'center',
     },
     semiCircle: {
-        width: responsiveSize(20),
-        backgroundColor: '#fff',
-        height: responsiveSize(40),
-        borderColor: '#dfdfdf',
-        position : 'absolute',
-        justifyContent: 'center',
-        bottom: PhoneHeight <= 568 ? responsiveSize(25):responsiveSize(14.5),
-        borderRightColor: "#fff",
-        alignSelf: 'center',
-        borderTopLeftRadius: 150,
-        borderBottomLeftRadius: 150,
-        borderWidth: 0,
-        transform: [{ rotate: "90deg"}],
+      width: responsiveSize(20),
+      backgroundColor: '#fff',
+      height: responsiveSize(40),
+      borderColor: '#dfdfdf',
+      position : 'absolute',
+      justifyContent: 'center',
+      bottom: PhoneHeight <= 568 ? responsiveSize(25):responsiveSize(14.5),
+      borderRightColor: "#fff",
+      alignSelf: 'center',
+      borderTopLeftRadius: 150,
+      borderBottomLeftRadius: 150,
+      borderWidth: 0,
+      transform: [{ rotate: "90deg"}],
     },
     appIcon: {
-        width: responsiveSize(25),
-        height: responsiveSize(35),
-        backgroundColor: '#fff',
-        marginTop: 10,
-        zIndex: 99,
+      width: responsiveSize(25),
+      height: responsiveSize(35),
+      backgroundColor: '#fff',
+      marginTop: 10,
+      zIndex: 99,
     }
 })
 export default RouterComp;
