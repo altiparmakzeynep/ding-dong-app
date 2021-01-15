@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_BASE } from '../components/config/env';
-import { Actions, Alert } from 'react-native';
+import { Alert } from 'react-native';
+import { Actions } from "react-native-router-flux";
 
 export const SIGN_IN_CLICK      = "sign_in_click";
 export const SIGN_IN_SUCCESS    = "sign_in_success";
@@ -10,8 +11,8 @@ export const SIGN_UP_CLICK      = "sign_up_click";
 export const SIGN_UP_SUCCESS    = "sign_up_success";
 export const SIGN_UP_FAILED     = "sign_up_failed";
 
-export const signUpClicked = (fullname, phone, email, password, ) => {
-    let data = JSON.stringify({ fullname: fullname, phone: phone, email: email, password: password })
+export const signUpClicked = (fullname, phone, email, password, gender, date ) => {
+    let data = JSON.stringify({ fullname: fullname, phone: phone, email: email, password: password, gender: gender, date: date })
     return dispatch => {
         dispatch({
             type: SIGN_UP_CLICK
@@ -33,12 +34,15 @@ export const signUpClicked = (fullname, phone, email, password, ) => {
                     payload: result.data.data
                 })
                 Actions.signIn()
+                console.log("başarılı")
             }
         }).catch((err) => {
             dispatch({
                 type: SIGN_UP_FAILED,
                 payload: err.response.data.errors
             })
+            console.log("umut: ", err);
+
         })
     }
 }

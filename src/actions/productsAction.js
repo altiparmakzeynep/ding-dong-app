@@ -7,6 +7,9 @@ export const FETCH_PRODUCTS         = "fetch_products";
 export const ADD_TO_CART            = "add_to_cart";
 export const REMOVE_TO_CART         = "remove_to_cart";
 export const REMOVE_ALL_CART        = "remove_all_cart";
+export const ADD_TO_FAVS            = "add_to_favs";
+export const REMOVE_TO_FAVS         = "remove_to_favs";
+
 
 export const fetchCategories = (item) => {
     return dispatch => {
@@ -77,16 +80,31 @@ export const fetchProducts = (sub_cat_id) => {
 }
 
 export const addToCart = (item) =>{
-    console.log("ürün fiyatı: ", item.price, item.amount)
     return {
         type: ADD_TO_CART,
         payload: item
       };
 }
+
+export const addToFavs = (item) =>{
+    return {
+        type: ADD_TO_FAVS,
+        payload: item,
+      };
+}
+
 export const removeToCart = (item) =>{
     console.log("ürün: ", item)
     return {
         type: REMOVE_TO_CART,
+        payload: item
+      };
+}
+
+export const removeToFavs = (item) =>{
+    console.log("ürün: ", item)
+    return {
+        type: REMOVE_TO_FAVS,
         payload: item
       };
 }
@@ -97,3 +115,5 @@ export const removeAllCart = (item) =>{
         payload: item
       };
 }
+
+

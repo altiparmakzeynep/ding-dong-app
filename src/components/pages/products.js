@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, FlatList, Image} from 'react-native';
 import { connect } from 'react-redux';
 import { PhoneHeight, PhoneWidth, responsiveSize} from '../config/env';
-import { fetchCategories, fetchSubCategories, fetchProducts, addToCart } from '../../actions/productsAction';
+import { fetchCategories, fetchSubCategories, fetchProducts, addToCart, addToFavs, removeToFavs } from '../../actions/productsAction';
 import { Actions } from 'react-native-router-flux';
 
 
 class main extends Component {
+  state = {
+    checked: 0,
+    isClicked: null
+  }
+
   componentWillMount() {
     this.props.fetchSubCategories(this.props.cat_id)
     this.props.fetchProducts(this.props.product_id)
@@ -26,9 +31,7 @@ subCategoriesRenderItem = ({item}) => {
   </View>
   )
 }
-// zeynep = (item) => {
-// console.log("rüüüüü", item.id)
-// }
+
 productRenderItem = ({ item }) => {
   return(
     <View style= {styles.allProducts}>
@@ -44,10 +47,29 @@ productRenderItem = ({ item }) => {
         <Text style= {{fontSize: responsiveSize(10)}}>{item.desc}</Text>
         </View>
         <View style= {styles.priceTextContainer}>
-        <TouchableOpacity style= {styles.favIconContainer}>
-          <Image 
-            source={require('../../images/emptyHeart.png')}
-            style= {styles.favIcon}/>
+        <TouchableOpacity 
+        
+           onPress= {() => 
+         {  this.state.checked = this.state.checked + 1
+             if(this.state.checked % 2 == 1) {
+               this.props.addToFavs(item) 
+               this.setState({
+                 isClicked: true
+               })
+          }
+          else{
+            this.props.removeToFavs(item)
+            this.setState({
+              isClicked: false
+            })
+          }}
+        }
+           style= {styles.favIconContainer}>
+
+           {
+            this.state.isClicked == true ? 
+            <Image style={styles.favIcon} source={require('../../images/fulHeart.png')} />:<Image style={styles.favIcon} source={require('../../images/emptyHeart.png')} />
+           }
         </TouchableOpacity>
         <Text style= {styles.priceTxt}> {item.price} {item.amount}</Text>
         </View>
@@ -62,7 +84,6 @@ productRenderItem = ({ item }) => {
       </TouchableOpacity>
     </View>
   </View>
-   
   )
 }
   render() {
@@ -214,6 +235,9 @@ export default connect(
     fetchCategories,
     fetchSubCategories,
     fetchProducts,
-    addToCart
+    addToCart,
+    addToFavs,
+    removeToFavs
+    
   }
 )(main) ;

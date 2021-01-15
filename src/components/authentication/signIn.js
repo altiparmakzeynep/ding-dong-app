@@ -33,6 +33,7 @@ class signIn extends Component {
           </View>
           <View style= {styles.inputsContainer}>
             <TextInput 
+                maxLength={10}
                 placeholder= "phone number"
                 placeholderTextColor='#00000029'
                 style= {styles.input}
@@ -49,7 +50,9 @@ class signIn extends Component {
                 onPress= {() => this.onSignIn()}>
               <Text style= {styles.loginText}>login</Text>
             </TouchableOpacity>
-            {/* <Text> Hesabın yok mu? <Text onPress= {() => Actions.signUp()}> signup </Text></Text> */}
+            <Text style= {{ top: PhoneHeight * 0.01 }}> Don't you have an account? 
+             <Text style= {{ fontWeight: "bold" }} onPress= {() => Actions.signUp()}> Sign Up </Text>
+            </Text>
           </View>
         </View>   
       )

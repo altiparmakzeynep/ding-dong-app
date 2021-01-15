@@ -2,9 +2,12 @@ import {
     FETCH_CATEGORIES,
     FETCH_SUB_CATEGORIES,
     FETCH_PRODUCTS,
+    FETCH_FAVS,
     ADD_TO_CART,
     REMOVE_TO_CART,
-    REMOVE_ALL_CART
+    REMOVE_ALL_CART,
+    ADD_TO_FAVS,
+    REMOVE_TO_FAVS
 } from '../actions/productsAction'
 const INITIAL_STATE =  {
     categoriesValue: [],
@@ -14,7 +17,10 @@ const INITIAL_STATE =  {
     product_id: "",
     products: [],
     productsLength:0,
-    totalAmount: 0
+    totalAmount: 0,
+    favs: [],
+    checked: 0,
+    favValue: []
 }
 
 export default ( state = INITIAL_STATE, action) => {
@@ -31,10 +37,15 @@ export default ( state = INITIAL_STATE, action) => {
                 subCategoriesValue: action.payload,
             }
         case FETCH_PRODUCTS:
-            console.log("okan aklıma geldi", action.payload.id)
             return {
                 ...state,
                 productsValue: action.payload,
+                product_id: action.payload.item_id
+            }
+        case FETCH_FAVS:
+            return {
+                ...state,
+                favValue: action.payload,
                 product_id: action.payload.item_id
             }
         case ADD_TO_CART:
@@ -44,16 +55,34 @@ export default ( state = INITIAL_STATE, action) => {
                 products: state.products.concat(action.payload),
                 totalAmount: state.totalAmount + action.payload.price
             }
+        case ADD_TO_FAVS:
+            console.log("arrrrr: " , action.payload)
+            return { 
+                ...state,
+                favs: state.favs.concat(action.payload),
+                checked: state.checked + 1,
+            }
         case REMOVE_TO_CART:
             return {
                 ...state,
-               products: state.products.filter(products => products.id !== action.payload.id)
+               products: state.products.filter(products => products.id !== action.payload.id),
+               totalAmount: state.totalAmount - action.payload.price
+
+            }
+        case REMOVE_TO_FAVS:
+            return {
+                ...state,
+                favs: state.favs.filter(products => products.id !== action.payload.id),
+                checked: state.checked + 1,
+
             }
         case REMOVE_ALL_CART:
             console.log("tamamını silme",action.payload);
             return {
                 ...state,
-                products: state.products.splice(action.payload,0)
+                products: state.products.splice(action.payload,0),
+                totalAmount: 0
+
             }
         default:
             return state;

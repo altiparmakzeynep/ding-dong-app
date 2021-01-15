@@ -138,7 +138,7 @@ for (let j = 20; j <= 40; j++) {
                 </ScrollView>
                 <View style={styles.footer}>
                     <View style={styles.footerTitleWrapper}>
-                        <Text style={styles.footerTitle}> Total: </Text>
+                        <Text style={styles.footerTitle}> Total: {this.props.totalAmount} </Text>
                         <Text style={styles.footerSubTitle}> {this.props.selectedSubsMonthPricing} </Text>
                     </View>
                     <AppButton
@@ -422,10 +422,12 @@ const mapStateToProps = state => {
     const {
         paymentProcessModalStatusValue,
         paymentProcessModalContent,
+        
     } = state.paymentReducer;
     return {
         paymentProcessModalStatusValue,
         paymentProcessModalContent,
+        
     }
 }
 
@@ -433,5 +435,6 @@ export default connect(
     mapStateToProps,
     {
         paymentProcessModalStatus,
+    
     }
 )(payment)

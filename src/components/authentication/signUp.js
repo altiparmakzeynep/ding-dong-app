@@ -23,7 +23,6 @@ onEmailChanged = (value) => this.setState({emailValue: value})
 onPasswordChanged = (value) => this.setState({passwordValue: value})
 onConfirmPasswordChanged = (value) => this.setState({confirmPasswordValue: value})
 
-
 onSignUp = () => {
     console.log("bastı mı");
     this.props.signUpClicked(this.state.fullNameValue, this.state.phoneNumberValue, this.state.emailValue, this.state.passwordValue )
@@ -43,8 +42,9 @@ onSignUp = () => {
                 style={styles.input}
                 placeholder='name surname'
                 placeholderTextColor='#00000029'
-                onChangeText={this.onfullNameChange}/> 
+                onChangeText={this.onfullNameChanged}/> 
             <TextInput 
+                maxLength={10}
                 style={styles.input}
                 placeholder='phone'
                 placeholderTextColor='#00000029'
@@ -60,7 +60,7 @@ onSignUp = () => {
                 style={styles.input}
                 placeholder='password'
                  placeholderTextColor='#00000029'
-                onChangeText={(value) => this.onPasswordChanged(value)}/>  
+                onChangeText={this.onPasswordChanged}/>  
             <TextInput 
                 secureTextEntry
                 style={styles.input}
@@ -70,11 +70,14 @@ onSignUp = () => {
          </View>
          <View style= {styles.signUpButtonContainer}>
              <TouchableOpacity 
-                  onPress = {this.onSignUp()}
+                  onPress = {this.onSignUp}
                   style= {styles.signUpButton}>
                  <Text style= {styles.signUpButtonText}>sign up</Text>
              </TouchableOpacity>
          </View>
+         <Text style= {{ top: PhoneHeight * 0.01 }}> Do you have an account? 
+             <Text style= {{ fontWeight: "bold" }} onPress= {() => Actions.signIn()}> Sign In </Text>
+            </Text>
         </View> 
     )
   }

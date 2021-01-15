@@ -46,7 +46,9 @@ categoriesRenderItem = ({item}) =>{
           <TouchableOpacity style= {styles.topAddress}>
            <Text style= {styles.topAddresText}> ADRESS</Text>
            <View style= {styles.firstCampaign}></View>
-           <View style= {styles.secondCampaign}></View>
+           <View style= {styles.secondCampaign}>
+             
+           </View>
            <View style= {styles.thirdCampaign}></View>
            <View style= {styles.fourthCampaign}></View>
            <View>

@@ -4,13 +4,13 @@ import { PhoneWidth,PhoneHeight, responsiveSize } from '../../components/config/
 import { removeToCart,removeAllCart, addToCart } from '../../actions/productsAction';
 import { FlatList } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import { color } from 'react-native-reanimated';
 import { Actions } from 'react-native-router-flux';
  
   class cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      counter: 1
     };
   }
  cartRenderItem = ({ item }) => {
@@ -27,21 +27,24 @@ import { Actions } from 'react-native-router-flux';
                 <Text style= {styles.priceTxt}> {item.price} {item.amount} </Text>
           </View>  
       <View style= {styles.plusAndMinusContainer}>  
-          <View style= {styles.plusButtonContainer}>
-                  <View style= {styles.plusContainer}>
-                    <TouchableOpacity >
-                      <Image 
-                        style= {styles.plusIcon}
-                        source= {require("../../images/plus1.png")}/>
-                    </TouchableOpacity>
-                  </View>
-              <View style= {styles.minusContainer}>
-                  <TouchableOpacity >
-                    <Image 
+          <View style= {styles.amountContainer}>
+                  <TouchableOpacity 
+                     onPress= {() => this.setState({ counter: this.state.counter - 1})}
+                     style= {styles.plusContainer}>
+                     <Image 
                       style= {styles.minusIcon}
                       source= {require("../../images/minus.png")}/>
                   </TouchableOpacity>
-              </View>  
+                  <View style= {styles.amountTxt}>
+                    <Text> {this.state.counter} </Text>
+                  </View>
+                  <TouchableOpacity 
+                       onPress= {() => this.setState({ counter: this.state.counter + 1})}
+                       style= {styles.minusContainer}>
+                       <Image 
+                        style= {styles.plusIcon}
+                        source= {require("../../images/plus1.png")}/>
+                  </TouchableOpacity>  
           </View> 
           <View style= {styles.deleteContainer}>
             <TouchableOpacity
@@ -85,7 +88,7 @@ import { Actions } from 'react-native-router-flux';
             /> 
         <View style= {styles.totalBtnContainer}>
           <View style= {styles.totalCartBtn}> 
-            <Text style= {styles.totalTxt}>Total: {totalAmount} $ </Text>
+            <Text style= {styles.totalTxt}>Total: {this.state.counter * totalAmount} $ </Text>
           </View>
         </View>
         <View style= {styles.confirmBtnContainer}>
@@ -108,19 +111,54 @@ const styles = StyleSheet.create({
       alignSelf: "center",
       width: PhoneWidth * 0.9,
       height: PhoneHeight * 0.10,
-      borderWidth: 1,
+      borderWidth: 0,
       borderColor:"#1B7E00",
       borderRadius: 19,
       backgroundColor: "#fff",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
     },
-    plusButtonContainer:{
+    amountContainer:{
       height: PhoneHeight * 0.03,
       width: PhoneWidth * 0.2,
-      borderWidth:2,
-      borderRadius: 6,
-      borderColor: "#1B7E00",
+      // borderWidth:0,
+      // borderColor: "#1B7E00",
     },
-      //ürün adı ve fiyat bilgisinin kutusu
+    plusContainer:{
+      borderWidth: 0,
+      backgroundColor: "#1B7E00",
+      position: "absolute",
+      borderTopLeftRadius: 6,
+      borderBottomLeftRadius: 6,
+      width: PhoneHeight * 0.03,
+      height: PhoneHeight * 0.027,
+      justifyContent: "center"
+    },
+    amountTxt:{
+       borderWidth: 1,
+       width: PhoneHeight * 0.04,
+       height: PhoneHeight * 0.027,
+       alignSelf: "center",
+       alignItems: "center",
+       borderColor: "#1B7E00"
+    },
+    minusContainer:{
+      borderWidth: 0,
+      backgroundColor: "#1B7E00",
+      position: "absolute",
+      borderTopRightRadius: 6,
+      borderBottomRightRadius: 6,
+      width: PhoneHeight * 0.03,
+      height: PhoneHeight * 0.027,
+      justifyContent: "center",
+      marginLeft: PhoneWidth * 0.13
+    },
     textInfoContainer:{
       borderWidth:0,
       height: PhoneHeight * 0.1,
@@ -130,7 +168,18 @@ const styles = StyleSheet.create({
     },
     plusAndMinusContainer:{//artı ve eksi sembollerinin kutusunu bir view e aldım ki marginsiz ortalayabileyim diye
       flexDirection:'row',// artı, eksi, ve çarpıyı yan yana dizer.
-      marginTop: PhoneHeight*0.03//3'ünü de dikeyde ortalar. 
+      marginTop: PhoneHeight*0.03,//3'ünü de dikeyde ortalar. ,
+      borderWidth: 0
+    },
+    plusIcon:{
+     alignSelf: "center",
+     width: responsiveSize(10),
+     height: responsiveSize(10)
+    },
+    minusIcon:{
+      alignSelf: "center",
+      width: responsiveSize(10),
+      height: responsiveSize(10)
     },
     allProducts:{
       borderWidth:0,
@@ -147,38 +196,14 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.095,
       borderRadius: 24,
     },
-    plusContainer:{
-      borderWidth: 0,
-      backgroundColor: "red",
-      height: PhoneHeight * 0.025,
-      paddingHorizontal:7,//yatayda hafif bosluk verir ki sağdaki çirkin görünüm olmasın 
-      justifyContent: "center",//artı butonunu dikeyde ortalar
-      alignItems: "flex-end"//artı butonunun her şeyi (sağa yaslar)!!!
-    },
-    minusContainer:{
-      borderWidth: 0,
-      marginBottom: PhoneHeight * 0.3,//- yi yukarı cıkarabilmek için yazıldı başka bir yol bulamadım. Muhtemelen vardır. 
-      width: PhoneWidth * 0.075,
-      height: PhoneHeight * 0.025,
-      paddingHorizontal:7,//yatayda hafif bosluk verir ki sağdaki çirkin görünüm olmasın 
-      justifyContent: "center",
-      position: "absolute"
-    },
+ 
     deleteContainer:{
       height: PhoneHeight * 0.027,
-      width: PhoneWidth * 0.05,
+      width: PhoneWidth * 0.07,
       borderWidth:0,
-      paddingHorizontal:PhoneWidth*0.12,
       borderColor: "black",
-      justifyContent:'center'   
-    },
-    plusIcon:{
-      width: responsiveSize(12),
-      height: responsiveSize(12),
-    },
-    minusIcon:{
-      width: responsiveSize(12),
-      height: responsiveSize(12),
+      justifyContent:'center'   ,
+      marginLeft: PhoneWidth * 0.1
     },
     deleteIcon:{
       width: responsiveSize(20),

@@ -16,7 +16,7 @@ class RouterComp extends Component {
     render() {
          return (
             <Router>
-             <Stack key="root" hideNavBar >
+             <Stack  key="root" hideNavBar >
                 <Stack key="auth" hideNavBar >
                     <Scene 
                         
@@ -63,13 +63,13 @@ class RouterComp extends Component {
                                 key="cart"
                                 title="CART"
                                 icon={({focused}) => (
-                                    <Image style={styles.tabIcon} source={focused ? require('./images/groceries.png'):require('./images/groceries.png')} />)}
+                                    <Image style={styles.tabIcon} source={focused ? require('./images/cart.png'):require('./images/cart.png')} />)}
                                 component={cart} />
                             <Scene
                                 key="favourites"
                                 title="FAVOURITES"
                                 icon={({focused}) => (
-                                    <Image style={styles.tabIcon} source={focused ? require('./images/fulHeart.png'):require('./images/fulHeart.png')} />)}
+                                    <Image style={styles.tabIcon} source={focused ? require('./images/like.png'):require('./images/like.png')} />)}
                                 component={favourites} />
                          </Tabs>
                        
