@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import {
     FETCH_CATEGORIES,
     FETCH_SUB_CATEGORIES,
@@ -51,6 +52,14 @@ export default ( state = INITIAL_STATE, action) => {
             }
         case ADD_TO_CART:
             console.log(action.payload.price)
+            Alert.alert(
+                'DING DONG!', 
+                'The product has been successfully added to the cart',
+                
+                [
+                  { text: 'OK', onPress: () => null }
+                ]
+              );
             return { 
                 ...state,
                 products: state.products.concat(action.payload),

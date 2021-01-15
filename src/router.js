@@ -98,7 +98,7 @@ class RouterComp extends Component {
                         <Scene  
                             
                             key= "productsInfo"
-                            title= "PRODUCT"
+                            title= "PRODUCT INFO"
                             component={productsInfo} /> 
                         <Scene  
                             

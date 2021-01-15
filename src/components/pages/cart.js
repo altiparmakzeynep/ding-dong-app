@@ -29,7 +29,15 @@ import { Actions } from 'react-native-router-flux';
             <View style= {styles.plusAndMinusContainer}>  
                 <View style= {styles.amountContainer}>
                         <TouchableOpacity 
-                          onPress= {() => this.setState({ counter: this.state.counter - 1})}
+                          onPress= {() =>    { 
+                            if(this.state.counter > 0) {
+                              this.setState({
+                                counter: this.state.counter - 1
+                              })
+                             }
+                           else{
+                           this.props.removeToCart(item)
+                         }}}
                           style= {styles.plusContainer}>
                           <Image 
                             style= {styles.minusIcon}

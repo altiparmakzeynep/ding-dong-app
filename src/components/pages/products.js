@@ -72,7 +72,7 @@ productRenderItem = ({ item }) => {
     </TouchableOpacity> 
     <View style= {styles.plusButtonContainer}>
       <TouchableOpacity 
-          onPress= {() => this.props.addToCart(item) } >
+          onPress= {() => this.props.addToCart(item) }>
         <Image 
             source={require('../../images/plus.png')}
             style= {styles.plusIcon}

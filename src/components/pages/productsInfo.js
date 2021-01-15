@@ -8,15 +8,15 @@ class productsInfo extends Component {
     constructor(props) {
         super(props);
     }
-productRenderItem = ({item}) => {
-    return(
-        <View>
-             <View style= {styles.infoContainer}>
-             <Text style= {styles.productName}>{item.title}</Text>
-         </View>
-        </View>
-    )
-}
+// productRenderItem = ({item}) => {
+//     return(
+//         <View>
+//              <View style= {styles.infoContainer}>
+//              <Text style= {styles.productName}>{item.title}</Text>
+//          </View>
+//         </View>
+//     )
+// }
   render() {
     const { productsValue } = this.props;
 
@@ -28,9 +28,10 @@ productRenderItem = ({item}) => {
                 source={{
                     uri : "https://elements-cover-images-0.imgix.net/ca395cdd-2525-4b9e-8764-148dc0db7e6d?auto=compress%2Cformat&fit=max&w=866&s=01ca284b4a95d13d3958ae12cdb60098"
                 }}/>
-         {/* <View style= {styles.infoContainer}>
+         <View style= {styles.infoContainer}>
              <Text style= {styles.productName}>Chocolate</Text>
-         </View> */}
+             <Text style= {{alignSelf: "center"}}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:</Text>
+         </View>
            <FlatList 
                 data={productsValue}  
                 renderItem={this.productRenderItem}/>
