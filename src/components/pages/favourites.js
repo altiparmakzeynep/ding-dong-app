@@ -90,7 +90,7 @@ class main extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "pink"
+        backgroundColor: "#F4FFF1"
     },
     horizontalCategoriesBtn:{
       borderWidth: 0,

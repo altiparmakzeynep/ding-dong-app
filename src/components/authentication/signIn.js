@@ -39,6 +39,7 @@ class signIn extends Component {
                 style= {styles.input}
                 onChangeText={(value) => this.onPhoneNumberChanged(value)}/>
             <TextInput 
+                secureTextEntry
                 placeholder= "password"
                 placeholderTextColor='#00000029'
                 style= {styles.input}

@@ -31,7 +31,7 @@ class RouterComp extends Component {
                         component={signUp} />
                 </Stack> 
                 
-                <Stack initial
+                <Stack 
                        navigationBarStyle={styles.navigationBar}
                        key= "main">
 

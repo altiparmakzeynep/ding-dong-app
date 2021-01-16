@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text, FlatList, Image} from 'react-
 import { connect } from 'react-redux';
 import { PhoneHeight, PhoneWidth, responsiveSize} from '../config/env';
 import { fetchCategories, fetchSubCategories, fetchProducts, addToCart, addToFavs, removeToFavs } from '../../actions/productsAction';
+import { Actions } from 'react-native-router-flux';
 
 class main extends Component {
   state = {
@@ -34,7 +35,7 @@ productRenderItem = ({ item }) => {
   return(
     <View style= {styles.allProducts}>
       <TouchableOpacity 
-          onPress={() => this.props.fetchProducts(item.id)}
+          onPress={() => this.props.fetchProducts(item.id) &  Actions.productsInfo()  } 
           style= {styles.productContainer}>
         <Image style= {styles.productImages} 
                source={{

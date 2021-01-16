@@ -6,29 +6,29 @@ import { fetchCategories, fetchSubCategories, fetchProducts, addToCart, addToFav
 
 const data = [
     {
-      title: "muz", 
-      image: "",
+      title: "Banana", 
+      uri: "https://elements-cover-images-0.imgix.net/06158768-2796-47ff-b51c-e00c09135d32?auto=compress%2Cformat&fit=max&w=866&s=c27749e1ea94992c819f6617e204b00b",
       price: "10",
       amount: "$",
-      desc: "muz",
+      desc: "banana",
       piece: "12"
     },
     {
-      title: "çilek", 
-      image: "",
+      title: "Apple", 
+      uri: "https://elements-cover-images-0.imgix.net/44eb2556-6cd5-45ac-9a06-b3f4e5b645f1?auto=compress%2Cformat&fit=max&w=866&s=c3e3eafe23525b49c2c978623ce7a9dc",
       price: "10",
       amount: "$",
-      desc: "çilek",
+      desc: "apple",
       piece: "12"
     },
-    {
-      title: "cips", 
-      image: "",
-      price: "10",
-      amount: "$",
-      desc: "cips",
-      piece: "12"
-    }
+    // {
+    //   title: "Carrot", 
+    //   uri: "https://elements-cover-images-0.imgix.net/015c87ae-1678-49ce-8ad2-1955439bdde7?auto=compress%2Cformat&fit=max&w=866&s=4c7b4eed6aae49aeb8de2b8717e91f1a",
+    //   price: "10",
+    //   amount: "$",
+    //   desc: "carrot",
+    //   piece: "12"
+    // }
 ]
 
 class search extends Component {
@@ -49,10 +49,10 @@ searchRenderItem = ({item}) => {
       <TouchableOpacity 
           onPress={() => this.props.fetchProducts(item.id)}
           style= {styles.productContainer}>
-        {/* <Image style= {styles.productImages} 
+        <Image style= {styles.productImages} 
                source={{
-                uri : item.image
-              }}/> */}
+                uri : item.uri
+              }}/>
         <View style= {styles.productInfo} >
         <Text style= {{fontSize: responsiveSize(13)}}>{item.title}</Text>
         <Text style= {{fontSize: responsiveSize(10)}}>{item.desc}</Text>
@@ -103,10 +103,7 @@ searchRenderItem = ({item}) => {
       const filteredData = data.filter((item)=>{
           return item.desc.indexOf(this.state.searchKey) >= 0
       })
-      console.log("ÜRÜNLERİMİZ: ", this.props.productsValue)
     return(
-      
-     
         <View style= {styles.container}>
            <View style= {styles.searchContainer}>
                <View>
@@ -120,10 +117,10 @@ searchRenderItem = ({item}) => {
                         <TouchableOpacity 
                             onPress={() => this.props.fetchProducts(item.id)}
                             style= {styles.productContainer}>
-                          {/* <Image style= {styles.productImages} 
+                          <Image style= {styles.productImages} 
                                  source={{
-                                  uri : item.image
-                                }}/> */}
+                                  uri : item.uri
+                                }}/>
                           <View style= {styles.productInfo} >
                           <Text style= {{fontSize: responsiveSize(13)}}>{item.title}</Text>
                           <Text style= {{fontSize: responsiveSize(10)}}>{item.desc}</Text>
@@ -200,6 +197,7 @@ const styles = StyleSheet.create({
     // },
     searchTxt: {
         borderWidth: 0,
+        marginTop: PhoneHeight * 0.01,
         alignSelf: "center",
         borderRadius: 14,
         backgroundColor: "#fff",
@@ -217,8 +215,9 @@ const styles = StyleSheet.create({
         marginLeft: PhoneWidth * 0.77
         },
         searchIcon:{
-           width: responsiveSize(25),
-           height: responsiveSize(25),
+          marginTop: PhoneHeight * 0.01,
+          width: responsiveSize(25),
+          height: responsiveSize(25),
         },
         horizontalCategoriesBtn:{
           borderWidth: 0,

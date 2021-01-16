@@ -34,14 +34,13 @@ export const signUpClicked = (fullname, phone, email, password, gender, date ) =
                     payload: result.data.data
                 })
                 Actions.signIn()
-                console.log("başarılı")
+                console.log("success")
             }
         }).catch((err) => {
             dispatch({
                 type: SIGN_UP_FAILED,
                 payload: err.response.data.errors
             })
-            console.log("umut: ", err);
 
         })
     }
@@ -77,7 +76,7 @@ export const signInClicked = (phone, password) => {
                 })
             }
         }).catch((err) => {
-            Alert.alert("Uyarı",'WRONG PHONE NO OR PASSWORD')
+            Alert.alert("Warning",'WRONG PHONE NO OR PASSWORD')
             dispatch({
                 type: SIGN_IN_FAILED,
                 payload: err.response.data.errors

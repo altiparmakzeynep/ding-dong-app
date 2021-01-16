@@ -21,20 +21,17 @@ export const fetchCategories = (item) => {
                 'Accept': 'application/json'
             }
         }).then((result) => {
-            console.log("kategoriler geldi canim", item)
             dispatch({
                 type: FETCH_CATEGORIES,
                 payload: {data: result.data.data, cat_id:item }
             })
         }).catch((err) => {
-            console.log("kategori gelmedi canim");
             console.log(err.response)
         })
     }
 }
 
 export const fetchSubCategories = (cat_id) => {
-    console.log("YETER: ",  cat_id)
     return dispatch => {
         axios({
             method: "get",
@@ -44,20 +41,17 @@ export const fetchSubCategories = (cat_id) => {
                 'Accept': 'application/json'
             }
         }).then((result) => {
-            console.log("alt kategoriler geldi", result.data.data)
             dispatch({
                 type: FETCH_SUB_CATEGORIES,
                 payload: result.data.data
             })
         }).catch((err) => {
-            console.log("alt kategoriler gelmedi canim");
             console.log(err.response)
         })
     }
 }
 
 export const fetchProducts = (sub_cat_id) => {
-    console.log("YETER: ",  sub_cat_id)
     return dispatch => {
         axios({
             method: "get",
@@ -67,13 +61,11 @@ export const fetchProducts = (sub_cat_id) => {
                 'Accept': 'application/json'
             }
         }).then((result) => {
-            console.log("alt kategoriler geldi", result.data.data)
             dispatch({
                 type: FETCH_PRODUCTS,
                 payload: result.data.data
             })
         }).catch((err) => {
-            console.log("alt kategoriler gelmedi canim");
             console.log(err.response)
         })
     }
@@ -94,7 +86,7 @@ export const addToFavs = (item) =>{
 }
 
 export const removeToCart = (item) =>{
-    console.log("ürün: ", item)
+    console.log("product: ", item)
     return {
         type: REMOVE_TO_CART,
         payload: item
@@ -102,14 +94,14 @@ export const removeToCart = (item) =>{
 }
 
 export const removeToFavs = (item) =>{
-    console.log("ürün: ", item)
+    console.log("product: ", item)
     return {
         type: REMOVE_TO_FAVS,
         payload: item
       };
 }
 export const removeAllCart = (item) =>{
-    console.log("ürün: ", item)
+    console.log("product: ", item)
     return {
         type: REMOVE_ALL_CART,
         payload: item
